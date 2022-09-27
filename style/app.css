@@ -26,6 +26,7 @@ a {
     border-radius: 5px;
     transition: all .3s ease-in-out;
     cursor: pointer;
+    background-color: #999;
 }
 
 .btn-principal {
@@ -68,9 +69,7 @@ header {
 }
 
 .header-nav li a {
-    border: 1px solid .btn:hover {}
-
-    ;
+    border: 1px solid;
     display: block;
     text-align: center;
     text-decoration: none;
