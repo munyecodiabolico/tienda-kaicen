@@ -1,14 +1,33 @@
 html {
     font-family: Montserrat, Arial, Helvetica, sans-serif;
-    color: #ccc;
+    color: #444;
 }
 
 * {
     box-sizing: border-box;
 }
 
+.section {
+    padding-top:4rem;
+    padding-bottom: 4rem;
+}
+
+h2 {
+    font-size: 2.2rem;
+    margin-bottom:4rem;
+}
+
 a {
-    color: #999;
+    color: #444;
+}
+select {
+    border: 1px solid #999;
+    border-radius: 0;
+    padding: .5rem 1rem;
+}
+
+.shadow {
+    box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 7px 20px rgba(0,0,0,.2);
 }
 
 .h-100 {
@@ -17,6 +36,10 @@ a {
 
 .w-100 {
     width: 100%;
+}
+
+.vh-100 {
+    height: 100vh;
 }
 
 .btn {
@@ -35,7 +58,6 @@ a {
     color: white;
 }
 
-
 .btn-principal:hover {
     background-color: hsl(89, 63%, 41%);
 }
@@ -44,17 +66,31 @@ a {
     background-color: hsl(51, 84%, 12%);
 }
 
-.background-principal {
-    background-color: hsl(89, 65%, 48%);
-
+.color-principal {
+    color:  hsl(89, 65%, 48%);
 }
 
+
+.background-principal {
+    background-color: hsl(89, 65%, 48%);
+}
+
+.img-back, .img-responsive {
+    height: 100%;
+    width:100%;
+    object-fit:cover;
+}
+
+
+/* ---------------- HEADER --------------------- */
 header {
     height: 12vh;
+    box-shadow: 0 1px 2px rgb(100,100,100,.3), 0 2px 10px rgba(0,0,0,.2);
+
 }
 
 .header-logo svg {
-    width: 70%;
+    max-width: 80%;
 }
 
 .header-logo-text {
@@ -87,6 +123,8 @@ header {
     color: white;
 }
 
+
+/* ----------------- slider ---------------- */
 .slider {
     height: 88vh;
     position: relative;
@@ -129,3 +167,229 @@ header {
     position: relative;
     top: 3px;
 }
+
+/* ---------------- Estilos FEATURED y PRODUCTOS --------------- */
+
+.card {
+    text-align: center;
+    background-color: white;
+}
+.card h2 {
+    color:hsl(89, 65%, 48%);
+    text-align: center;
+}
+
+.card .card-item {
+    box-shadow: 0 1px 5px rgba(0,0,0,.4), 0 7px 20px rgba(0,0,0,.2);
+    padding: 1rem;
+    border-radius: .5rem;
+    position: relative;
+    display: block;
+    text-decoration: none;
+}
+
+.card .card-item-img{
+    width: 100%;
+    height:15rem;
+}
+
+.card .card-item-img img {
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+
+.card .card-item-category p {
+    font-weight: bold;
+    margin: .5rem 0;
+}
+
+.card .card-item-price {
+    position: absolute;
+    top: 0;
+    right:-10px;
+    background-color: red;
+    color: white;
+    padding: .5rem 2rem;
+    transform: rotate(15deg);
+    box-shadow: 0 1px 5px rgba(0,0,0,.7), 0 7px 10px rgba(0,0,0,.3);
+}
+
+.card .card-item-price p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+
+/* ---------------- BANNER ------------------- */
+
+.banner {
+    display: flex;
+}
+
+.banner-image-back {
+    background: url(/img/fondo-vegan.jpg);
+    width:100%;
+    height: 100vh;
+    background-size: cover;
+    display:flex;
+}
+
+.banner .banner-description {
+    font-size: 1.6rem;
+    line-height:2.3rem;
+}
+
+
+/* --------------- FOOTER ------------------- */
+footer {
+    background-color: gray;
+    padding: 1rem;
+    text-align: center; 
+}
+footer p {
+    margin:0;
+    line-height: 2rem;
+    color: white;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: all .3s ease-in-out;
+}
+
+footer a:hover {
+    background-color: rgb(97, 96, 96);
+}
+
+
+/* ----------------- ASIDE PAG. PRODUCTOS ----------------- */
+
+aside.products-category {
+    background-color: hsl(0, 0%, 90%);
+    padding: 1rem;
+}
+
+.products-category h2 {
+    font-size: 1.5rem;
+}
+
+.products-category .products-category-nav ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom:0;
+}
+
+.products-category .products-category-nav li {
+    list-style-type: none;
+    padding: 1rem 1rem;
+    border-top: 1px solid rgba(0,0,0,.15);
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+
+.products-category .products-category-nav li:hover {
+        background-color: rgba(0,0,0,.1);
+}
+
+.products-category .products-category-nav li:active {
+    background-color: rgba(0,0,0,.3);
+    color: white;
+}
+
+.products-category .products-category-nav li:last-child {
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+.products-resaults-selector {
+    display: flex;
+    justify-content: end;
+}
+
+.products-gallery .card {
+    background-color: white;
+    transition: all .3s ease-in-out;
+    cursor:pointer;
+}
+
+.products-gallery .card:hover {
+    transform: scale(1.08);
+    z-index:100;
+}
+
+
+/* ------------------ UN PRODUCTO ---------------- */
+.slider-gallery .slider-gallery-img {
+    height: 32rem;
+}
+
+.slider-gallery .slider-gallery-thumbnails {
+    list-style-type: none;
+    padding: 0;
+    margin-top:2rem
+}
+
+.slider-gallery .slider-gallery-thumbnails li img{
+    padding: 3px;
+    transition: all .3s ease-in-out;
+}
+
+.slider-gallery .slider-gallery-thumbnails li img:hover{
+    background-color:#777;
+    transform: scale(1.08);
+}
+
+.product-info .product-info-price{
+    margin: 1rem 0 2rem;
+}
+
+.product-info .product-info-price span {
+    background-color: red;
+    color: white;
+    padding: .5rem 2rem;
+    box-shadow: 0 1px 5px rgba(0,0,0,.7), 0 7px 10px rgba(0,0,0,.3);
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: inline;
+}
+
+.add-substract {
+    display: flex;
+}
+
+.add-substract .increment,
+.add-substract .decrement {
+    border-radius: 0;
+    padding: .5rem 1rem;
+    background-color: hsl(89, 65%, 48%);
+    font-weight: bold;
+    border: 0;
+    border-top: 1px solid hsl(89, 65%, 48%);
+    border-bottom: 1px solid hsl(89, 65%, 48%);
+}
+.add-substract input {
+    width:5rem;
+    text-align: center;
+    border-left:0;
+    border-right:0;
+    border-top: 1px solid hsl(89, 65%, 48%);
+    border-bottom: 1px solid hsl(89, 65%, 48%);
+}
+
+.add-substract .increment:hover,
+.add-substract .decrement:hover  {
+    background-color: hsl(89, 63%, 41%);
+}
+.add-substract .increment:active,
+.add-substract .decrement:active  {
+    background-color: hsl(51, 84%, 12%);
+    color: white;
+}
+
+button.comprar {
+    border:0
+}
+
