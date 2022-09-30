@@ -82,6 +82,20 @@ a
     object-fit:cover;
 }
 
+.text-align-left {
+    text-align:left;
+}
+
+.text-align-right {
+    text-align:right;
+}
+
+.text-align-center {
+    text-align:center;
+}
+
+
+
 
 /* ---------------- HEADER --------------------- */
 header {
@@ -91,7 +105,7 @@ header {
 }
 
 .header-logo svg {
-    max-width: 80%;
+    max-width: 75%;
 }
 
 .header-logo-text {
@@ -394,3 +408,42 @@ button.comprar {
     border:0
 }
 
+/* ---------------- CONTACTO ---------------- */
+.contact {
+    min-height:55vh;
+}
+.contact input,
+.contact textarea {
+    width: 100%;
+    margin-bottom:1rem;
+    border:1px solid hsla(89, 63%, 41%,.6);
+    background-color:hsla(89, 63%, 41%,.2);
+    padding: .5rem 1rem;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+    outline: 0px;
+    box-shadow: 0 0 10px hsla(89, 63%, 41%, 1);
+    background-color: white;
+}
+
+.contact textarea {
+    height: 15rem;
+}
+
+.contact svg {
+    fill:  hsl(89, 65%, 48%);
+    vertical-align:middle;
+    margin-right:1rem;
+    width: 1.9rem;
+    
+}
+
+.contact p {
+    font-size: 1.2rem;
+}
+
+.contact-info {
+    
+}
