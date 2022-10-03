@@ -448,8 +448,6 @@ aside.products-category {
     display: inline;
 }
 
-
-
 button.comprar {
     border: 0
 }
@@ -467,6 +465,7 @@ button.comprar {
     background-color: hsla(89, 63%, 41%, .2);
     padding: .5rem 1rem;
     border-radius: 5px;
+    transition: all .6s ease-in-out;
 }
 
 .contact input[type="radio"]{
