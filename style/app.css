@@ -23,7 +23,7 @@ a {
 
 select {
     border: 1px solid #999;
-    border-radius: 0;
+    border-radius: 5px;
     padding: .5rem 1rem;
 }
 
@@ -44,13 +44,21 @@ a .vh-100 {
 }
 
 .btn {
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: 1rem 2rem;
     border: none;
     border-radius: 5px;
     transition: all .3s ease-in-out;
     cursor: pointer;
     background-color: #999;
+}
+
+.btn-sm {
+    font-size:90%;
+    padding:.7rem 1.5rem;
+}
+.btn-lg {
+    font-size: 1.5rem;
 }
 
 .btn-principal {
@@ -112,6 +120,54 @@ a .vh-100 {
 }
 
 
+/* ---------------- ADD-SUBSTRACT ELEMENT ----------------- */
+
+.add-substract {
+    display: flex;
+}
+
+.add-substract .increment,
+.add-substract .decrement {
+    border-radius: 0;
+    padding: .5rem 1rem;
+    background-color: hsl(89, 65%, 48%);
+    font-weight: bold;
+    border: 0;
+    border-top: 1px solid hsl(89, 65%, 48%);
+    border-bottom: 1px solid hsl(89, 65%, 48%);
+}
+
+.add-substract .decrement {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+
+.add-substract .increment {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.add-substract input {
+    width: 3rem;
+    text-align: center;
+    border-left: 0;
+    border-right: 0;
+    border-top: 1px solid hsl(89, 65%, 48%);
+    border-bottom: 1px solid hsl(89, 65%, 48%);
+}
+
+.add-substract .increment:hover,
+.add-substract .decrement:hover {
+    background-color: hsl(89, 63%, 41%);
+}
+
+.add-substract .increment:active,
+.add-substract .decrement:active {
+    background-color: hsl(51, 84%, 12%);
+    color: white;
+}
+
 
 
 /* ---------------- HEADER --------------------- */
@@ -137,11 +193,12 @@ header {
 }
 
 .header-nav li a {
+    border-radius: 5px;
     border: 1px solid;
     display: block;
+    padding: 1rem;
     text-align: center;
     text-decoration: none;
-    padding: 1rem;
     transition: all .3s ease-in-out;
 }
 
@@ -305,6 +362,7 @@ footer a:hover {
 aside.products-category {
     background-color: hsl(0, 0%, 90%);
     padding: 1rem;
+    border-radius:5px;
 }
 
 .products-category h2 {
@@ -390,40 +448,7 @@ aside.products-category {
     display: inline;
 }
 
-.add-substract {
-    display: flex;
-}
 
-.add-substract .increment,
-.add-substract .decrement {
-    border-radius: 0;
-    padding: .5rem 1rem;
-    background-color: hsl(89, 65%, 48%);
-    font-weight: bold;
-    border: 0;
-    border-top: 1px solid hsl(89, 65%, 48%);
-    border-bottom: 1px solid hsl(89, 65%, 48%);
-}
-
-.add-substract input {
-    width: 5rem;
-    text-align: center;
-    border-left: 0;
-    border-right: 0;
-    border-top: 1px solid hsl(89, 65%, 48%);
-    border-bottom: 1px solid hsl(89, 65%, 48%);
-}
-
-.add-substract .increment:hover,
-.add-substract .decrement:hover {
-    background-color: hsl(89, 63%, 41%);
-}
-
-.add-substract .increment:active,
-.add-substract .decrement:active {
-    background-color: hsl(51, 84%, 12%);
-    color: white;
-}
 
 button.comprar {
     border: 0
@@ -442,6 +467,10 @@ button.comprar {
     background-color: hsla(89, 63%, 41%, .2);
     padding: .5rem 1rem;
     border-radius: 5px;
+}
+
+.contact input[type="radio"]{
+    width:auto;
 }
 
 .contact input:focus,
@@ -467,4 +496,63 @@ button.comprar {
     font-size: 1.2rem;
 }
 
-.contact-info {}
+
+
+/* ---------------------  CARRITO DE LA COMPRA Y CHECKOUT ----------------- */
+
+.carrito-header {
+    background-color: rgba(0,0,0,.15);
+    text-align: center;
+}
+
+.carrito-header>[class*="col-"]:not(:last-child) {
+    border-right: 2px solid white;
+}
+
+.carrito-product, .summary-purchase .row .row {
+    border:1px solid rgba(0, 0, 0, .35);
+    border-top:none;
+}
+
+.carrito-product>[class*="col-"]:not(:last-child),
+.summary-purchase .row>[class*="col-"]:not(:last-child){
+    border-right:1px solid rgba(0, 0, 0, .35);
+}
+.carrito-product .conten-img {
+    width:4rem;
+    height: 4rem;
+}
+
+.carrito-product .carrito-product-name {
+    margin: 0;
+}
+
+.carrito-product input {
+    width:3rem;
+}
+
+
+.summary-purchase {
+    border-radius: 5px;
+    overflow: hidden;
+}
+.summary-purchase h3 {
+    color: white;
+    margin: 0;
+}
+
+.summary-purchase .row.summary-purchase-line:last-child {
+    background-color:rgba(0,0,0,.35);
+    border:none;
+    border-radius:0 0 5px 5px;
+}
+
+.summary-purchase .row.summary-purchase-line:last-child>[class*="col-"]:not(last-child) {
+    border-color:white;
+}
+
+.summary-purchase .col.summary-options .row,
+.summary-purchase .col.summary-buttons .row {
+    border:none;
+    margin-top:2rem;
+}
