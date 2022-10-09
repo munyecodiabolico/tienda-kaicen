@@ -43,6 +43,63 @@ a .vh-100 {
     height: 100vh;
 }
 
+/* 
+    Hacer que un contenedor siempre sea cuadrado sea cual sea el viewport 
+        <div class="card-item-img square">
+            <div class="content">
+                <img src="img/pexels-pixabay-461198.jpg" alt="">
+            </div>
+        </div> 
+*/
+/* La clase .square se usa en el contenedor que hace de mascara de la imagen */
+.square {
+    position: relative;
+    width: 100%;
+  }
+  
+  .square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+  /* La clase .content se usa en un contenedor extra que envuelve la imagen */
+  .content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+/* 
+*    FIN Hacer que un contenedor siempre sea cuadrado sea cual sea el viewport   
+*/
+
+/* 
+  Cuando hacemos una seccion donde hay varias columnas, si alguna es mas alta que las otras,
+  normalmente vemos diferentes alturas en dichos elementos, al contenedor que generamos dentro
+  de la columna hay que ponerle la clase mantener-alto. Ademas si queremos que un elemento en
+  concreto se alinee abajo en todos los contenedores, independientemente del contenido que tiene.
+  O sea, hay que crear dos contenedores, uno con la info que va alineada arriba y otro con lo que
+  ira alineado abajo. Con esta clase hara este efecto.
+*/
+.mantener-alto{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+/* 
+    Esta clase hace que al elemento que se la aplicas si es muy largo, el texto solo ocupa 3 lineas y le añade tres puntos '...?
+*/
+.ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  
+
 .btn {
     font-size: 1rem;
     padding: 1rem 2rem;
@@ -274,13 +331,12 @@ header {
     padding: 1rem;
     border-radius: .5rem;
     position: relative;
-    display: block;
     text-decoration: none;
+    background-color: white;
 }
 
 .card .card-item-img {
     width: 100%;
-    height: 15rem;
 }
 
 .card .card-item-img img {
@@ -319,7 +375,7 @@ header {
 }
 
 .banner-image-back {
-    background: url(/img/fondo-vegan.jpg);
+    background: url(/img/pexels-lumn-1028599.jpg);
     width: 100%;
     height: 100vh;
     background-size: cover;
@@ -402,7 +458,7 @@ aside.products-category {
 }
 
 .products-gallery .card {
-    background-color: white;
+    background-color: transparent;
     transition: all .3s ease-in-out;
     cursor: pointer;
 }
@@ -415,7 +471,7 @@ aside.products-category {
 
 /* ------------------ UN PRODUCTO ---------------- */
 .slider-gallery .slider-gallery-img {
-    height: 32rem;
+    width: 100%;
 }
 
 .slider-gallery .slider-gallery-thumbnails {
@@ -502,6 +558,7 @@ button.comprar {
 .carrito-header {
     background-color: rgba(0,0,0,.15);
     text-align: center;
+    border-radius: 5px 5px 0 0;
 }
 
 .carrito-header>[class*="col-"]:not(:last-child) {
@@ -517,11 +574,9 @@ button.comprar {
 .summary-purchase .row>[class*="col-"]:not(:last-child){
     border-right:1px solid rgba(0, 0, 0, .35);
 }
-.carrito-product .conten-img {
-    width:4rem;
-    height: 4rem;
+.carrito-products div:last-child {
+    border-radius:0 0 5px 5px
 }
-
 .carrito-product .carrito-product-name {
     margin: 0;
 }
