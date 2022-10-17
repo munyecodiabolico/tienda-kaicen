@@ -1,46 +1,60 @@
+
+/*  Estilos generales que se aplicaran a toda la web 
+    como son la tipografia general y el color del texto que se aplicarán por defecto.
+*/
 html {
     font-family: Montserrat, Arial, Helvetica, sans-serif;
     color: #444;
 }
 
+/* La siguiente regla hace que todos los elementos ocupen siempre lo que indica el width y el height
+aunque pongamos padding porque lo que hace en este caso el padding es añadirlo en el interior de la
+caja en lugar de ampliar el width o height hacia fuera*/
 * {
     box-sizing: border-box;
 }
 
+/* Aqui asignamos un padding-top y bottom igual para que todas las secciones tengan la misma separación */
 .section {
     padding-top: 4rem;
     padding-bottom: 4rem;
 }
 
+/* Fuente y margin abajo que tendrán todos los h2 en general excepto a los que se le cambie de forma particular */
 h2 {
     font-size: 2.2rem;
     margin-bottom: 4rem;
 }
 
+/* Color que tendrán todos los enlaces de manera genérica */
 a {
     color: #444;
 }
 
+/* Estilos que tendrán en general todos las etiquetas select */
 select {
     border: 1px solid #999;
     border-radius: 5px;
     padding: .5rem 1rem;
 }
 
+select:focus-visible {
+    outline: hsl(89, 65%, 48%) auto 1px;
+}
+
+/* Aplica una doble sombra a todos los elementos que se le aplique esta clase */
 .shadow {
     box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 7px 20px rgba(0, 0, 0, .2);
 }
 
+/* Altura del 100% del alto del contenedor que contenga al elemento que se le aplique esta clase */
 .h-100 {
     height: 100%;
 }
 
+/* Ancho del 100% del alto del contenedor que contenga al elemento que se le aplique esta clase */
 .w-100 {
     width: 100%;
-}
-
-a .vh-100 {
-    height: 100vh;
 }
 
 /* 
@@ -62,6 +76,7 @@ a .vh-100 {
     display: block;
     padding-bottom: 100%;
   }
+
   /* La clase .content se usa en un contenedor extra que envuelve la imagen */
   .content {
     position: absolute;
@@ -98,8 +113,11 @@ a .vh-100 {
     overflow: hidden;
   }
   
-  
-
+/*  Estilos por defecto para todos los botones de la web
+    La propieda transition lo que hace es que cuando pasas o pulsas encima del boton
+    el cambio de color, tamaño, etc. se haga de manera suave
+    La propiedad cursor:pointer hace que se vea la manita cuando pasas por encima  
+*/
 .btn {
     font-size: 1rem;
     padding: 1rem 2rem;
@@ -110,14 +128,18 @@ a .vh-100 {
     background-color: #999;
 }
 
+/*  Clase extra añadida a la de btn para que sea más pequeño */
 .btn-sm {
     font-size:90%;
     padding:.7rem 1.5rem;
 }
+
+/*  Clase extra añadida a la de btn para que sea más grande */
 .btn-lg {
     font-size: 1.5rem;
 }
 
+/* Las próximas 3 clases extra añadida a la de btn para personalizar los botones principales de la web y sus efectos */
 .btn-principal {
     border: 3px solid hsl(255, 255%, 255%);
     background-color: hsl(89, 65%, 48%);
@@ -132,6 +154,7 @@ a .vh-100 {
     background-color: hsl(51, 84%, 12%);
 }
 
+/* Las próximas 3 clases extra añadida a la de btn para personalizar los botones secundarios de la web y sus efectos */
 .btn-secondary {
     background-color: hsl(0, 0%, 80%);
     color: #999;
@@ -146,24 +169,27 @@ a .vh-100 {
     background-color: hsl(0, 0%, 45%);
 }
 
+/* Clase para aplicar el color principal de la web a los distintos elementos */
 .color-principal {
     color: hsl(89, 65%, 48%);
 }
 
-
-
-
+/* Clase para aplicar el color principal a los fondos de los distintos elementos */
 .background-principal {
     background-color: hsl(89, 65%, 48%);
 }
 
-.img-back,
+/*  Hace que las img a las que se les aplica esta clase se amplien o reduzcan proporcionalmente
+    a su contenedor a fin de que no quede espacio en blanco, ampliando o reduciendo desde el centro
+    de la imagen
+*/
 .img-responsive {
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
 
+/* Las próximas 3 clases sirven para alinear los textos a izquierda, derecha o centro */
 .text-align-left {
     text-align: left;
 }
@@ -228,6 +254,7 @@ a .vh-100 {
 
 
 /* ---------------- HEADER --------------------- */
+
 header {
     height: 12vh;
     box-shadow: 0 1px 2px rgb(100, 100, 100, .3), 0 2px 10px rgba(0, 0, 0, .2);
@@ -275,12 +302,6 @@ header {
     height: 88vh;
     position: relative;
     width: 100%;
-}
-
-.slider .slider-img img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
 }
 
 .slider .slider-info {
@@ -333,16 +354,6 @@ header {
     position: relative;
     text-decoration: none;
     background-color: white;
-}
-
-.card .card-item-img {
-    width: 100%;
-}
-
-.card .card-item-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .card .card-item-category p {
@@ -511,10 +522,6 @@ button.comprar {
 }
 
 /* ---------------- CONTACTO ---------------- */
-.contact {
-    min-height: 55vh;
-}
-
 .contact input,
 .contact textarea {
     width: 100%;
@@ -561,6 +568,7 @@ button.comprar {
     background-color: rgba(0,0,0,.15);
     text-align: center;
     border-radius: 5px 5px 0 0;
+    border: 1px solid rgba(0, 0, 0, .35);
 }
 
 .carrito-header>[class*="col-"]:not(:last-child) {
