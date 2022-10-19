@@ -1,0 +1,50 @@
+/* ---------------- ADD-SUBSTRACT ELEMENT ----------------- */
+
+.add-substract {
+    display: flex;
+}
+
+.add-substract .increment,
+.add-substract .decrement {
+    border-radius: 0;
+    padding: .5rem 1rem;
+    background-color: $primary-color;
+    font-weight: bold;
+    border: 0;
+    border-top: 1px solid  $primary-color;
+    border-bottom: 1px solid  $primary-color;
+    color:$white;
+    transition: all .3s ease-in-out;
+    cursor:pointer;
+}
+
+.add-substract .decrement {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+
+.add-substract .increment {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.add-substract input {
+    width: 3rem;
+    text-align: center;
+    border-left: 0;
+    border-right: 0;
+    border-top: 1px solid  $primary-color;
+    border-bottom: 1px solid  $primary-color;
+}
+
+.add-substract .increment:hover,
+.add-substract .decrement:hover {
+    background-color: darken($primary-color,10%);
+}
+
+.add-substract .increment:active,
+.add-substract .decrement:active {
+    background-color:  darken($primary-color,20%);
+    color: white;
+}

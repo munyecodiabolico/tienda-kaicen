@@ -1,0 +1,17 @@
+/* ---------------- BANNER ------------------- */
+
+.banner-image-back {
+    background: url(/img/fondo-vegan.jpg);
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    .banner {
+        display: flex;
+    }
+    .banner-description {
+        font-size: 1.6rem;
+        line-height: 2.3rem;
+    }
+}
+

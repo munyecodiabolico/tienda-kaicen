@@ -1,0 +1,37 @@
+/* ---------------- HEADER --------------------- */
+header {
+    height: 12vh;
+    box-shadow: 0 1px 2px rgb(100, 100, 100, .3), 0 2px 10px rgba(0, 0, 0, .2);
+    .header-logo svg {
+        max-width: 65%;
+    }
+    .header-logo-text {
+        font-size: 15px;
+        text-align: center;
+        position: relative;
+        top: -10px;
+    }
+    .header-nav {
+        ul {
+            list-style-type: none;
+        }
+        a {
+            border-radius: 5px;
+            border: 1px solid;
+            display: block;
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all .3s ease-in-out;
+            &:hover {
+                background-color: darken($primary-color,10%);
+                color: $white;
+            }
+            
+            &:focus {
+                background-color: darken($primary-color,20%);
+                color: $white;
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+/* ------------------ SLIDER GALLERY ---------------- */
+.slider-gallery {
+    .slider-gallery-img {
+        width: 100%;
+    }
+    .slider-gallery-thumbnails {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 2rem;
+        li img {
+            padding: 3px;
+            transition: all .3s ease-in-out;
+            cursor: pointer;
+            &:hover {
+                box-shadow: 0 0 0 2px $primary-color, 0 0 30px 0 darken($primary-color,20%);
+                transform: scale(1.08);
+            }
+        }
+    }
+}
+
+

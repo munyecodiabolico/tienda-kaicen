@@ -1,0 +1,28 @@
+/* ---------------------  CARRITO DE LA COMPRA Y CHECKOUT ----------------- */
+.carrito {
+    .carrito-header {
+        background-color: rgba($gray-999,.35);
+        text-align: center;
+        border-radius: 5px 5px 0 0;
+        border: 1px solid rgba($gray-999, .55);
+        &>[class*="col-"]:not(:last-child) {
+            border-right: 2px solid white;
+        }
+    }
+    .carrito-products div:last-child {
+        border-radius:0 0 5px 5px
+    }
+    .carrito-product {
+        border:1px solid rgba($gray-999, .55);
+        border-top:none;
+        &>[class*="col-"]:not(:last-child) {
+            border-right:1px solid rgba($gray-999, .55);
+        }
+        .carrito-product-name {
+            margin: 0;
+        }
+        input {
+            width:3rem;
+        }
+    }
+}

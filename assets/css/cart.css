@@ -1,0 +1,59 @@
+/* ---------------------  CARRITO DE LA COMPRA Y CHECKOUT ----------------- */
+.carrito-header {
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+.carrito-header > [class*=col-]:not(:last-child) {
+  border-right: 2px solid white;
+}
+
+.carrito-product, .summary-purchase .row .row {
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-top: none;
+}
+
+.carrito-product > [class*=col-]:not(:last-child),
+.summary-purchase .row > [class*=col-]:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+.carrito-products div:last-child {
+  border-radius: 0 0 5px 5px;
+}
+
+.carrito-product .carrito-product-name {
+  margin: 0;
+}
+
+.carrito-product input {
+  width: 3rem;
+}
+
+.summary-purchase {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.summary-purchase h3 {
+  color: white;
+  margin: 0;
+}
+
+.summary-purchase .row.summary-purchase-line:last-child {
+  background-color: rgba(0, 0, 0, 0.35);
+  border: none;
+  border-radius: 0 0 5px 5px;
+}
+
+.summary-purchase .row.summary-purchase-line:last-child > [class*=col-]:not(last-child) {
+  border-color: white;
+}
+
+.summary-purchase .col.summary-options .row,
+.summary-purchase .col.summary-buttons .row {
+  border: none;
+  margin-top: 2rem;
+}/*# sourceMappingURL=cart.css.map */

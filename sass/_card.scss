@@ -1,0 +1,40 @@
+// CARD STYLES
+
+.card {
+    text-align: center;
+    background-color: $white;
+    h2 {
+        color: $primary-color;
+        text-align: center;
+    }
+    .card-item {
+        box-shadow: 0 1px 5px rgba(0, 0, 0, .4), 0 7px 20px rgba(0, 0, 0, .2);
+        padding: 1rem;
+        border-radius: .5rem;
+        position: relative;
+        text-decoration: none;
+        background-color: $white;
+    }
+    .card-item-category p {
+        font-weight: bold;
+        margin: .5rem 0;
+    }
+    .card-item-price {
+        position: absolute;
+        top: 0;
+        right: -10px;
+        background-color: $danger-color;
+        color: $white;
+        padding: .5rem 2rem;
+        transform: rotate(15deg);
+        box-shadow: 0 1px 5px rgba(0, 0, 0, .7), 0 7px 10px rgba(0, 0, 0, .3);
+        p {
+            margin: 0;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+
+
