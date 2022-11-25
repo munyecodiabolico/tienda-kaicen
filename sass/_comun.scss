@@ -57,6 +57,19 @@ select:focus-visible {
     width: 100%;
 }
 
+.textareas {
+    position:relative;
+}
+.counter-text {
+    position: absolute;
+    right:15px;
+    top: 5px;
+    font-size: .7rem;
+}
+.pos-relative {
+    position:relative;
+}
+
 //  Hacer que un contenedor siempre sea cuadrado sea cual sea el viewport 
 //         <div class="card-item-img square">
 //             <div class="content">

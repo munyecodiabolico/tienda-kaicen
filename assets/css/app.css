@@ -4447,6 +4447,21 @@ select:focus-visible {
   width: 100%;
 }
 
+.textareas {
+  position: relative;
+}
+
+.counter-text {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  font-size: 0.7rem;
+}
+
+.pos-relative {
+  position: relative;
+}
+
 .square {
   position: relative;
   width: 100%;
@@ -4722,7 +4737,7 @@ header .header-nav a:focus {
 /* ---------------- Estilos FEATURED y PRODUCTOS --------------- */
 .products-resaults-selector {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   font-size: 0.8rem;
   line-height: 2rem;
 }
@@ -4821,6 +4836,11 @@ button.comprar {
   box-shadow: 0 0 10px #7dca2b;
   background-color: #ffffff;
 }
+.contact input.invalid, .contact textarea.invalid {
+  border: 1px solid #cc0000;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
 .contact input[type=radio] {
   width: auto;
 }
@@ -4835,6 +4855,17 @@ button.comprar {
 }
 .contact p {
   font-size: 1.2rem;
+}
+.contact .error-message {
+  font-size: 0.7rem;
+  color: #ff0000;
+  position: absolute;
+  bottom: -3px;
+  display: none;
+  margin: 0;
+}
+.contact .error {
+  color: #ff0000;
 }
 
 /* ---------------------  CARRITO DE LA COMPRA Y CHECKOUT ----------------- */
@@ -4890,6 +4921,56 @@ button.comprar {
 .summary-purchase .col.summary-buttons .row {
   border: none;
   margin-top: 2rem;
+}
+
+.product-features-tabs .item {
+  padding: 1rem;
+  text-decoration: none;
+  text-align: center;
+  background-color: #ddd;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.product-features-tabs .item.active {
+  padding-top: calc(1rem + 3px);
+  padding-bottom: calc(1rem + 3px);
+  top: -3px;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: none;
+  background-color: white;
+  color: #454545;
+  box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+.product-features-tabs .item:not(.active):hover {
+  background-color: #ccc;
+  transition: all 0.3s ease-in-out;
+}
+.product-features-tabs .item-content {
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  position: relative;
+  top: -4px;
+  border-radius: 5px;
+  box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+.product-features-tabs .item-content:first-child {
+  border-top-left-radius: 0px;
+}
+.product-features-tabs .features-wrapper {
+  background-color: red;
+}
+.product-features-tabs .active {
+  display: block;
 }
 
 /* --------------- FOOTER ------------------- */
