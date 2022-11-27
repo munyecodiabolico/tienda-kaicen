@@ -4857,12 +4857,13 @@ button.comprar {
   font-size: 1.2rem;
 }
 .contact .error-message {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: #ff0000;
   position: absolute;
-  bottom: -3px;
+  bottom: 7px;
   display: none;
-  margin: 0;
+  text-align: right;
+  right: 14px;
 }
 .contact .error {
   color: #ff0000;
