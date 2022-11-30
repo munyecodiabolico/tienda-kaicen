@@ -4753,5 +4753,176 @@ select:focus-visible {
   font-size: 2.5rem;
   font-weight: 100;
   margin-top: 0;
+  margin-bottom: 2rem;
   border-bottom: 1px solid #7dca2b;
+}
+.admin-panel .main-content .barra-opciones {
+  background-color: rgba(125, 202, 43, 0.2);
+}
+.admin-panel .main-content .items-list {
+  padding: 1rem 0;
+  list-style-type: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.admin-panel .main-content .items-list .trash, .admin-panel .main-content .items-list .edit {
+  transition: all 0.3s ease-in-out;
+}
+.admin-panel .main-content .items-list .options {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.admin-panel .main-content .items-list .item {
+  position: relative;
+  margin-bottom: 0.5rem;
+  background-color: whitesmoke;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+.admin-panel .main-content .items-list .item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 2px rgb(255, 255, 255), 0 0 6px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  background-color: rgba(125, 202, 43, 0.2);
+}
+.admin-panel .main-content .items-list .item:last-child {
+  margin-bottom: 0;
+}
+.admin-panel .main-content .items-list .item p {
+  margin: 0.5rem;
+}
+.admin-panel .main-content .items-list .item p:first-child {
+  padding-top: 1rem;
+}
+.admin-panel .main-content .items-list .name {
+  font-weight: bold;
+}
+.admin-panel .main-content .content-item-list {
+  border-radius: 5px;
+}
+.admin-panel .main-content .tabs {
+  margin-top: 0;
+}
+.admin-panel .trash,
+.admin-panel .edit,
+.admin-panel .save,
+.admin-panel .clear {
+  margin-left: 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+.admin-panel .trash:hover,
+.admin-panel .edit:hover,
+.admin-panel .save:hover,
+.admin-panel .clear:hover {
+  transform: scale(1.3);
+}
+.admin-panel svg {
+  padding: 0.2rem;
+  fill: #454545;
+}
+.admin-panel svg:hover {
+  fill: #7dca2b;
+}
+
+.product-features-tabs .item {
+  padding: 1rem;
+  text-decoration: none;
+  text-align: center;
+  background-color: #ddd;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.product-features-tabs .item.active {
+  padding-top: calc(1rem + 3px);
+  padding-bottom: calc(1rem + 3px);
+  top: -3px;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: none;
+  background-color: #7dca2b;
+  color: #ffffff;
+  box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+.product-features-tabs .item:not(.active):hover {
+  background-color: #ccc;
+  transition: all 0.3s ease-in-out;
+}
+.product-features-tabs .item-content {
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  position: relative;
+  top: -4px;
+  border-radius: 5px;
+  box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
+  display: none;
+  background-color: white;
+}
+.product-features-tabs .item-content:first-child {
+  border-top-left-radius: 0px;
+}
+.product-features-tabs .features-wrapper {
+  background-color: red;
+}
+.product-features-tabs .active {
+  display: block;
+}
+
+/* ---------------- ADMIN ---------------- */
+.admin-tabs input, .admin-tabs textarea {
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid #63a022;
+  background-color: rgba(125, 202, 43, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.6s ease-in-out;
+}
+.admin-tabs input:focus, .admin-tabs textarea:focus {
+  outline: 0px;
+  box-shadow: 0 0 10px #7dca2b;
+  background-color: #ffffff;
+}
+.admin-tabs input.invalid, .admin-tabs textarea.invalid {
+  border: 1px solid #cc0000;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+.admin-tabs input[type=radio] {
+  width: auto;
+}
+.admin-tabs textarea {
+  height: 15rem;
+}
+.admin-tabs svg {
+  fill: #7dca2b;
+  vertical-align: middle;
+  margin-right: 1rem;
+  width: 2.5rem;
+}
+.admin-tabs p {
+  font-size: 1.2rem;
+}
+.admin-tabs .error-message {
+  font-size: 0.6rem;
+  color: #ff0000;
+  position: absolute;
+  bottom: 7px;
+  display: none;
+  text-align: right;
+  right: 14px;
+}
+.admin-tabs .error {
+  color: #ff0000;
 }/*# sourceMappingURL=admin.css.map */

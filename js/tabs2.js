@@ -1,8 +1,8 @@
 
-export let renderTabs = () => {
+export let renderTabs2 = () => {
 
-    let items = document.querySelectorAll(".tabs1");
-    let items_contents = document.querySelectorAll(".cont-tabs1");
+    let items = document.querySelectorAll(".tabs2");
+    let items_contents = document.querySelectorAll(".cont-tabs2");
     
     items.forEach(item => {
         item.addEventListener("click", () => {

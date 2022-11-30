@@ -5015,6 +5015,7 @@ button.comprar {
   border-radius: 5px;
   box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
   display: none;
+  background-color: white;
 }
 .product-features-tabs .item-content:first-child {
   border-top-left-radius: 0px;
