@@ -185,7 +185,15 @@
 				</div>
 				<div class="header">
 					<div class="izda">
+						<div class="burger burger4 toggled">
+							<div></div>
+						  </div>
 						<div class="hamburger">
+							<a href="">
+								<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m22 16.75c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75z" fill-rule="nonzero"/></svg>
+							</a>
+						</div>
+						<div class="hamburger-close">
 							<a href="">
 								<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m22 16.75c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75zm0-5c0-.414-.336-.75-.75-.75h-18.5c-.414 0-.75.336-.75.75s.336.75.75.75h18.5c.414 0 .75-.336.75-.75z" fill-rule="nonzero"/></svg>
 							</a>
@@ -252,35 +260,34 @@
 						<div class="col-8">
 							<div class="content-item-list row product-features-tabs">
 								<div class="col-12">
-									<div class="barra-opciones d-flex justify-content-sm-between" >
-										<div>
-											<div class="item d-inline-block active tabs1" data-content="item1">
-												Contenido
+									<form action="" class="forms">
+										<div class="barra-opciones d-flex justify-content-sm-between" >
+											<div>
+												<div class="item d-inline-block active tabs1" data-content="item1">
+													Contenido
+												</div>
+												<div class="item d-inline-block tabs1" data-content="item2">
+													Imágenes
+												</div>
+												<div class="item d-inline-block tabs1" data-content="item3">
+													SEO
+												</div>
 											</div>
-											<div class="item d-inline-block tabs1" data-content="item2">
-												Imágenes
-											</div>
-											<div class="item d-inline-block tabs1" data-content="item3">
-												SEO
+											<div class="options d-flex justify-content-end align-items-center">
+
+												  <label class="on-off" for="toggle">
+													<input id="toggle" type="checkbox">
+													<span class="slider"></span>
+												  </label>
 											</div>
 										</div>
-										<div class="options d-flex justify-content-end align-items-center">
-											<div class="save" title="guardar"> 
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13 3h2.996v5h-2.996v-5zm11 1v20h-24v-24h20l4 4zm-17 5h10v-7h-10v7zm15-4.171l-2.828-2.829h-.172v9h-14v-9h-3v20h20v-17.171z"/></svg>
-											</div>
-											<div class="clear me-2" title="reset">
-												<svg width="30" height="30" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill-rule="evenodd" clip-rule="evenodd"><path d="M19 14.586l3.586-3.586 1.414 1.414-3.586 3.586 3.586 3.586-1.414 1.414-3.586-3.586-3.586 3.586-1.414-1.414 3.586-3.586-3.586-3.586 1.414-1.414 3.586 3.586zm-7 6.414h-12v-2h12v2zm0-4.024h-12v-2h12v2zm0-3.976h-12v-2h12v2zm12-4h-24v-2h24v2zm0-4h-24v-2h24v2z"/></svg>
-											</div>
-										</div>
-									</div>
-									<form action="">
 										<div>
 											<div class="item-content active cont-tabs1" data-content="item1">
 												<label for="name">Nombre</label>
 												<input type="text">
-												<div class="admin-tabs barra-opciones d-flex justify-content-sm-between" >
+												<div class="barra-opciones d-flex justify-content-sm-between" >
 													<div>
-														<div class="item d-inline-block tabs2 add-substract" data-content="item1">
+														<div class="item d-inline-block tabs2 add-substract active" data-content="item1">
 															Español
 														</div>
 														<div class="item d-inline-block tabs2" data-content="item2">
@@ -291,25 +298,28 @@
 														</div>
 													</div>
 												</div>
-												<form action="">
-													<div>
-														<div class="item-content active cont-tabs2"  data-content="item1">
-															Item 4
-														</div>
-														<div class="item-content cont-tabs2" data-content="item2">
-															Item 5
-														</div>
-														<div class="item-content cont-tabs2" data-content="item3">
-															Item 6
-														</div>
+												<div>
+													<div class="item-content active cont-tabs2"  data-content="item1">
+														<label for="name">Titular</label>
+														<input type="text">
 													</div>
-												</form>
+													<div class="item-content cont-tabs2" data-content="item2">
+														Item 5
+													</div>
+													<div class="item-content cont-tabs2" data-content="item3">
+														Item 6
+													</div>
+												</div>
 											</div>
 											<div class="item-content cont-tabs1" data-content="item2">
 												Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis illum ut omnis consectetur tempora? Voluptatibus!
 											</div>
 											<div class="item-content cont-tabs1" data-content="item3">
 												Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nihil officia hic expedita minus perspiciatis suscipit nemo a ea doloremque. Neque doloremque quia soluta enim est eum suscipit eos necessitatibus.
+											</div>
+											<div class="footer">
+												<button class="save" type="submit">Guardar</button>
+												<button class="reset" type="reset">Reset</button>
 											</div>
 										</div>
 									</form>
@@ -321,7 +331,7 @@
 				</div>
 			</div>
 			<!-- FIN footer -->
-			<script type="module" src="js/index.js"></script>
+			<script type="module" src="js/admin-index.js"></script>
 		</body>
 	
 	</html>
