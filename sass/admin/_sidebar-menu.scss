@@ -6,7 +6,6 @@
     z-index: 100;
     height: 100vh;
     width: 260px;
-    overflow: hidden;
     background: #303641;
     box-shadow: 2px 0 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
@@ -21,47 +20,85 @@
             height: 95px;
         }
     }
+    .nav {
+        width: 100%;
+    }
     ul {
-        list-style-type: none;
-        margin: 0;
-        padding:0;
-        transition: all 0.3s ease 0s;
-        &.submenu {
-            height:0;
-            overflow: hidden;
-            &.active {
-                height: auto;
+        padding: 0;
+        list-style: none;
+    }
+    .list {
+        width: 100%;
+        padding: 0;
+    }
+    .list-item {
+        cursor: pointer;
+        overflow: hidden;
+    }
+    .list-button {
+        display: flex;
+        align-items: center;
+    }
+    .list-button, .list-inside {
+        background-color: rgba($primary-color,.05);
+        margin-bottom: 1px;
+        transition:all .3s ease-in-out;
+        .nav-link {
+            width: 100%;
+            display: flex;
+            padding: .5rem 1rem;
+            text-decoration: none;
+            color:rgba($white,.6);
+            font-weight: 200;
+        }
+        &:hover {
+            background-color: rgba($primary-color,.15);
+            a {
+                color:$white;
             }
         }
-        li {
-            margin-bottom: 1px;
-            background-color:rgba(0,0,0,.3);
-            &:hover {
-                background-color:rgba(0,0,0,.5);
+        &.active {
+            background-color: rgba($black,.15);
+            a {
+                color:$white;
+                font-weight: 400;
+            }
+        }
+        
+        svg {
+            fill: $white;
+        }
+    }
+    .arrow .list-arrow {
+        transform: rotate(90deg);
+
+    }
+    .list-arrow {
+        transition: all .3s ease-in-out;
+        transform: rotate(0deg);
+    }
+    .list-show {
+        background-color: rgba($primary-color,.1);
+        border-left: 15px solid rgba(yellow,.3);
+        height:0;
+        transition: all .3s ease-in-out;
+        &-close {
+            height: 0px;
+        }
+    }
+    .list-inside {
+        background-color: rgba($primary-color,.05);
+        &.active {
+            background-color: darken(rgba($primary-color,1),35%);
+        }
+        &:hover {
+            background-color: rgba($primary-color,.25);
+            a {
+                color:$white;
+
             }
         }
     }
 
-    a {
-        color: white;
-        text-decoration: none;
-        display: block;
-        padding: .6rem 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 200;
-        &.active {
-            font-weight: 600;
-            background-color:black;
-        }
-    }
-    .material-symbols-outlined {
-        font-variation-settings:
-        'FILL' 0,
-        'wght' 200,
-        'GRAD' 0,
-        'opsz' 48
-    }
 
 }

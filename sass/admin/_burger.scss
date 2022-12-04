@@ -1,150 +1,41 @@
-.burger {
-    cursor: pointer;
-    padding: 3em 1.5em; ///////////////// touch area size
-  
-    & > div {
-      width: 4rem;
-      height: 0.5rem;
-      border-radius: 1rem;
-      background: black;
-      &::before,
-      &::after {
-        transition: font-size 0s;
-        content: "";
-        display: block;
-        position: absolute;
-        width: 4em;
-        height: 0.5em;
-        background: black;
-        border-radius: .5rem;
-      }
-      &::before {
-        margin-top: -1.5em;
-      }
-      &::after {
-        margin-top: 1.5em;
-      }
-    }
+.hamburger {
+	padding:.1rem .5rem;
+	margin-left:.2rem;
+	margin-right:1rem;
+
+}
+.hamburger .line{
+	width: 30px;
+	height: 3px;
+	background-color: $gray-999;
+	display: block;
+	margin: 8px auto;
+	-webkit-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
   }
   
-  
-  .burger4 {
-    & > div {
-      transition: all 0.4s, font-size 0s;
-      &::before,
-      &::after {
-        transition: font-size 0s;
-        transform-origin: center center;
-      }
-    }
-    &.toggled {
-      > div::before {
-        animation: burg4top 0.4s linear forwards;
-      }
-      > div {
-        animation: burg4 0.4s linear forwards;
-      }
-      > div::after {
-        animation: burg4bottom 0.4s linear forwards;
-      }
-    }
-  
-    &.unToggled {
-      > div::before {
-        animation: burg4topReset 0.4s linear forwards;
-      }
-      > div {
-        background: white;
-        animation: burg4reset 0.4s linear forwards;
-      }
-      > div::after {
-        animation: burg4bottomReset 0.4s linear forwards;
-      }
-    }
-    @keyframes burg4 {
-      50% {
-        transform: rotate(0deg);
-        background: black;
-      }
-      100% {
-        transform: rotate(360deg);
-        background: none;
-      }
-    }
-    @keyframes burg4top {
-      50% {
-        margin-top: 0;
-        transform: rotate(0deg);
-      }
-      100% {
-        margin-top: 0;
-        transform: rotate(45deg);
-      }
-    }
-  
-    @keyframes burg4bottom {
-      50% {
-        margin-top: 0;
-        transform: rotate(0deg);
-      }
-      100% {
-        margin-top: 0;
-        transform: rotate(-45deg);
-      }
-    }
-  
-    @keyframes burg4reset {
-      0% {
-        transform: rotate(0deg);
-        background: black;
-      }
-      50% {
-        transform: rotate(0deg);
-        background: black;
-      }
-      100% {
-        transform: rotate(-360deg);
-        background: black;
-      }
-    }
-    @keyframes burg4topReset {
-      0% {
-        transform: rotate(45deg);
-        margin-top: 0;
-      }
-      50% {
-        transform: rotate(0deg);
-        margin-top: 0em;
-      }
-      100% {
-        transform: rotate(0deg);
-        margin-top: 1.5em;
-      }
-    }
-  
-    @keyframes burg4bottomReset {
-      0% {
-        transform: rotate(-45deg);
-        margin-top: 0;
-      }
-      50% {
-        margin-top: 0;
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(0deg);
-        margin-top: -1.5em;
-      }
-    }
+  .hamburger:hover{
+	cursor: pointer;
   }
   
+  /* THREE */
   
+  #hamburger-3.is-active .line:nth-child(1),
+  #hamburger-3.is-active .line:nth-child(3){
+	width: 20px;
+  }
   
+  #hamburger-3.is-active .line:nth-child(1){
+	-webkit-transform: translate(-10px, 5px) rotate(-45deg);
+	-ms-transform: translate(-10px, 5px) rotate(-45deg);
+	-o-transform: translate(-10px, 5px) rotate(-45deg);
+	transform: translate(-10px, 5px) rotate(-45deg);
+  }
   
-  
-  
-  
-  
-  
-  
-  
+  #hamburger-3.is-active .line:nth-child(3){
+	-webkit-transform: translate(-10px, -5px) rotate(45deg);
+	-ms-transform: translate(-10px, -5px) rotate(45deg);
+	-o-transform: translate(-10px, -5px) rotate(45deg);
+	transform: translate(-10px, -5px) rotate(45deg);
+  }
