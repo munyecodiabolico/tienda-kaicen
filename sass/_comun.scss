@@ -70,59 +70,6 @@ select:focus-visible {
     position:relative;
 }
 
-.notification-wrapper {
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    display: none;
-    &.active {
-        display: flex;
-    }
-}
-
-.notification {
-    width:360px;
-    padding:2rem;
-    text-align: center;
-    display: flex;
-    position:relative;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-weight: 200;
-    margin: auto;
-    box-shadow: 0 10px 25px rgba(0,0,0,.3);
-    transform: translateY(-600%);
-    transition: opacity 2s ease-in-out,transform .8s ease-in-out;
-    opacity:0;
-    p {
-        font-size:1.5rem;
-        color:$white;
-        margin: 0;
-    }
-    img {
-        width:20%;
-        display: block;
-        filter:invert(100%);
-        margin-bottom: .5rem;
-    }
-    &.active {
-        background-color: $primary-color;
-        transform:translateY(0);
-        opacity:1;
-    }
-    &.error {
-        background-color: $danger-color;
-        transform:translateY(0);
-        opacity:1;
-    }
-
-}
-
 
 //  Hacer que un contenedor siempre sea cuadrado sea cual sea el viewport 
 //         <div class="card-item-img square">

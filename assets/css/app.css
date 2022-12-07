@@ -4462,58 +4462,6 @@ select:focus-visible {
   position: relative;
 }
 
-.notification-wrapper {
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: none;
-}
-.notification-wrapper.active {
-  display: flex;
-}
-
-.notification {
-  width: 360px;
-  padding: 2rem;
-  text-align: center;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-weight: 200;
-  margin: auto;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  transform: translateY(-600%);
-  transition: opacity 2s ease-in-out, transform 0.8s ease-in-out;
-  opacity: 0;
-}
-.notification p {
-  font-size: 1.5rem;
-  color: #ffffff;
-  margin: 0;
-}
-.notification img {
-  width: 20%;
-  display: block;
-  filter: invert(100%);
-  margin-bottom: 0.5rem;
-}
-.notification.active {
-  background-color: #7dca2b;
-  transform: translateY(0);
-  opacity: 1;
-}
-.notification.error {
-  background-color: #ff0000;
-  transform: translateY(0);
-  opacity: 1;
-}
-
 .square {
   position: relative;
   width: 100%;
@@ -4905,10 +4853,8 @@ button.comprar {
   margin-right: 1rem;
   width: 2.5rem;
 }
-.contact p {
-  font-size: 1.2rem;
-}
-.contact .error-message {
+
+.error-message {
   font-size: 0.6rem;
   color: #ff0000;
   position: absolute;
@@ -4917,8 +4863,62 @@ button.comprar {
   text-align: right;
   right: 14px;
 }
-.contact .error {
+
+.error {
   color: #ff0000;
+}
+
+.notification-wrapper {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+.notification-wrapper.active {
+  display: flex;
+}
+
+.notification {
+  width: 360px;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 200;
+  margin: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-600%);
+  transition: opacity 2s ease-in-out, transform 0.8s ease-in-out;
+  opacity: 0;
+  z-index: 1000;
+}
+.notification p {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 0;
+}
+.notification img {
+  width: 20%;
+  display: block;
+  filter: invert(100%);
+  margin-bottom: 0.5rem;
+}
+.notification.active {
+  background-color: #7dca2b;
+  transform: translateY(0);
+  opacity: 1;
+}
+.notification.error {
+  background-color: #ff0000;
+  transform: translateY(0);
+  opacity: 1;
 }
 
 /* ---------------------  CARRITO DE LA COMPRA Y CHECKOUT ----------------- */

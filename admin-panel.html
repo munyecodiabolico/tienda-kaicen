@@ -250,7 +250,7 @@
 						<div class="col-8">
 							<div class="content-item-list row product-features-tabs">
 								<div class="col-12">
-									<form action="" class="forms">
+									<form action="" class="forms admin-form">
 										<div class="barra-opciones d-flex justify-content-sm-between" >
 											<div>
 												<div class="item d-inline-block active tabs1" data-content="item1">
@@ -273,8 +273,12 @@
 										</div>
 										<div>
 											<div class="item-content active cont-tabs1" data-content="item1">
-												<label for="name">Nombre</label>
-												<input type="text">
+												<div class="pos-relative">
+													<label for="nombre">Nombre</label>
+													<input id="nombre" type="text" data-validate="names">
+													<p class="error-message">Formato incorrecto</p>
+												</div>
+												
 												<div class="barra-opciones d-flex justify-content-sm-between" >
 													<div>
 														<div class="item d-inline-block tabs2 add-substract active" data-content="item1">
@@ -308,18 +312,30 @@
 												Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nihil officia hic expedita minus perspiciatis suscipit nemo a ea doloremque. Neque doloremque quia soluta enim est eum suscipit eos necessitatibus.
 											</div>
 											<div class="footer">
-												<button class="save" type="submit">Guardar</button>
-												<button class="reset" type="reset">Reset</button>
+												<button id="submitForm" class="save">
+													GUARDAR
+												</button>
+												<button class="reset">
+													RESET
+												</button>
+
 											</div>
 										</div>
 									</form>
 								</div>
 							</div>
 						</div>
-						</div>
 					</div>
 				</div>
 			</div>
+			<div id="notification-wrapper" class="notification-wrapper">
+				<div id="notification" class="notification">
+					<img src="img/sobre.png" alt="">
+					<p id="notification-message"></p>
+				</div>
+			</div>
+			</div>
+
 			<!-- FIN footer -->
 			<script type="module" src="js/admin-index.js"></script>
 		</body>

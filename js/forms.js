@@ -3,10 +3,8 @@ import { counterText } from './counterText.js';
 
 export let renderForms = () => { 
 
-    let form = document.querySelector('form');
-    let inputs = form.elements;
+    let form = document.querySelector('.admin-form');
     let submitForm = document.querySelector('#submitForm');
-
     counterText();
 
     if (submitForm) {
@@ -15,7 +13,7 @@ export let renderForms = () => {
     
             event.preventDefault();
 
-            if(!validateForm(inputs)){
+            if(!validateForm(form.elements)){
                 return;
             };
 
