@@ -6,6 +6,7 @@ export let validateForm = inputs => {
         'emails': /\w+@\w+\.\w+/g,
         'numbers': /^\d{9}$/g,
         'names': /^[a-zA-Z0-9_-]{3,16}$/g
+        // 'passwords': /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/g 
     }
 
     for (let index = 0; index < inputs.length; index++) {
