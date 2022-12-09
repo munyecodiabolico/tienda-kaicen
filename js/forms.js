@@ -5,6 +5,8 @@ export let renderForms = () => {
 
     let form = document.querySelector('.admin-form');
     let submitForm = document.querySelector('#submitForm');
+    let url = form.dataset.url;
+    console.log(url);
     counterText();
 
     if (submitForm) {
@@ -20,7 +22,7 @@ export let renderForms = () => {
             let formData = new FormData(form);
             let formDataJson = Object.fromEntries(formData.entries());
 
-            fetch('http://192.168.1.16:8080/api/admin/users', {
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
