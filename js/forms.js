@@ -5,7 +5,7 @@ export let renderForms = () => {
 
     let form = document.querySelector('.admin-form');
     let submitForm = document.querySelector('#submitForm');
-    let url = form.dataset.url;
+    let url = form.action;
     console.log(url);
     counterText();
 

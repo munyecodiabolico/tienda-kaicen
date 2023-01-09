@@ -5046,4 +5046,53 @@ footer a {
 }
 footer a:hover {
   background-color: gray;
+}
+
+.login {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: #b2e982;
+}
+.login .formulario {
+  background-color: white;
+  width: 90vw;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+@media (min-width: 992px) {
+  .login .formulario {
+    width: 20%;
+  }
+}
+.login .formulario .logo-img {
+  width: 70%;
+  margin: auto;
+}
+.login .formulario .svg-img {
+  width: 100%;
+}
+.login .formulario h1 {
+  font-size: 1.5rem;
+}
+.login .formulario input {
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  width: 100%;
+}
+.login .formulario .checkbox {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.login .formulario label {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+.login .formulario input[type=checkbox] {
+  width: auto;
 }/*# sourceMappingURL=app.css.map */
