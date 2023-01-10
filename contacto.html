@@ -199,26 +199,26 @@
 						<!-- FIN info -->
 
                         <!-- Contacto form -->
-                        <form action="" class="col-6">
+                        <form action="http://127.0.0.1:8080/api/front/contacts" class="col-6 contact-form">
 							<div class="row">
 								<div class="col-6 pos-relative">
 									<label for="nombre">Nombre</label>
-									<input id="nombre"  class="mt-1"  type="text" data-validate="names">
+									<input id="nombre"  class="mt-1"  type="text" data-validate="names" name="nombre">
 									<p class="error-message">Formato incorrecto</p>
 								</div>
 								<div class="col-6 pos-relative">
 									<label for="apellidos">Apellidos</label>
-									<input id="apellidos" class="mt-1"   type="text"  data-validate="names">
+									<input id="apellidos" class="mt-1"   type="text"  data-validate="names" name="apellidos">
 									<p class="error-message">Formato incorrecto</p>
 								</div>
 								<div class="col-6 pos-relative">
 									<label for="telefono">Telefono</label>
-									<input id="telefono"  class="mt-1" type="text" data-validate="numbers">
+									<input id="telefono"  class="mt-1" type="text" data-validate="numbers" name="telefono">
 									<p class="error-message">Formato incorrecto</p>
 								</div>
 								<div class="col-6 pos-relative">
 									<label for="email">Email</label>
-									<input id="email" class="mt-1" type="text" data-validate="emails">
+									<input id="email" class="mt-1" type="text" data-validate="emails" name="email">
 									<p class="error-message">Formato incorrecto</p>
 								</div>
 								<div class="col-12 textareas pos-relative">
@@ -231,7 +231,7 @@
 							<!-- FIN info + formulario -->
 							<!-- info boton -->
 							<div>
-								<button id="submitForm" class="btn btn-sm btn-principal comprar mt-3">
+								<button id="submitContactForm" class="btn btn-sm btn-principal comprar mt-3">
 									ENVIAR
 								</button>
 								<button class="btn btn-sm btn-secondary comprar mt-3">

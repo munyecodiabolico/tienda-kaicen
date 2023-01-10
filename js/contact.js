@@ -1,16 +1,16 @@
 import { validateForm } from './validation3.js';
 
-export let renderForms = () => { 
+export let renderContactForms = () => { 
 
-    let submitForm = document.querySelector('#submitForm');
+    let submitContactForm = document.querySelector('#submitContactForm');
 
-    if (submitForm) {
+    if (submitContactForm) {
             
-        submitForm.addEventListener('click', event => {
+        submitContactForm.addEventListener('click', event => {
     
             event.preventDefault();
 
-            let form = document.querySelector('.admin-form');
+            let form = document.querySelector('.contact-form');
 
             if(!validateForm(form.elements)){
                 return;
@@ -19,13 +19,11 @@ export let renderForms = () => {
             let url = form.action;
             let formData = new FormData(form);
             let formDataJson = Object.fromEntries(formData.entries());
-            console.log(url);
-            console.log(formDataJson);
+ 
             fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formDataJson)
             }).then(response => {
