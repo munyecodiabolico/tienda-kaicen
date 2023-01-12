@@ -200,20 +200,21 @@
 
                         <!-- Contacto form -->
                         <form action="http://127.0.0.1:8080/api/front/contacts" class="col-6 contact-form">
+							<input type="hidden" name="fingerprintsId" value="1">
 							<div class="row">
 								<div class="col-6 pos-relative">
 									<label for="nombre">Nombre</label>
-									<input id="nombre"  class="mt-1"  type="text" data-validate="names" name="nombre">
+									<input id="nombre"  class="mt-1"  type="text" data-validate="names" name="name">
 									<p class="error-message">Formato incorrecto</p>
 								</div>
 								<div class="col-6 pos-relative">
 									<label for="apellidos">Apellidos</label>
-									<input id="apellidos" class="mt-1"   type="text"  data-validate="names" name="apellidos">
+									<input id="apellidos" class="mt-1"   type="text"  data-validate="names" name="surname">
 									<p class="error-message">Formato incorrecto</p>
 								</div>
 								<div class="col-6 pos-relative">
 									<label for="telefono">Telefono</label>
-									<input id="telefono"  class="mt-1" type="text" data-validate="numbers" name="telefono">
+									<input id="telefono"  class="mt-1" type="text" data-validate="numbers" name="phone">
 									<p class="error-message">Formato incorrecto</p>
 								</div>
 								<div class="col-6 pos-relative">
@@ -224,7 +225,7 @@
 								<div class="col-12 textareas pos-relative">
 									<label for="mensaje" class="mb-2">Mensaje</label>
 									<span class="counter-text"><span class="counter-num">0</span><span>/250</span></span>
-									<textarea name="mensaje" id="mensaje" class="mt-1" maxlength="250"></textarea>
+									<textarea name="message" id="mensaje" class="mt-1" maxlength="250"></textarea>
 									<p class="error-message"></p>
 								</div>
 							</div>
