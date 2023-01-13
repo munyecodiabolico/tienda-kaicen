@@ -155,35 +155,42 @@
                     <h1 class="text-align-center color-principal">Finalizar compra</h1>
                 </div>
                 <!-- Checkout content-->
-                <form action="">
+                <form action="http://127.0.0.1:8080/api/front/contacts">
                     <!-- Contacto form -->
                     <div class="row contact mt-5">
                         <div class="col-6">
                             <div class="row">
                                 <div class="col-6 pos-relative">
-                                    <label for="nombre">Nombre</label>
-                                    <input id="nombre"  class="mt-1"  type="text" data-validate="names">
+                                    <label for="name">Nombre</label>
+                                    <input id="name"  class="mt-1"  type="text" data-validate="names" name="name">
 									<p class="error-message">Formato incorrecto</p>
                                 </div>
                                 <div class="col-6 pos-relative">
-                                    <label for="apellidos">Apellidos</label>
-                                    <input id="apellidos" class="mt-1"   type="text" data-validate="names">
+                                    <label for="surname">Apellidos</label>
+                                    <input id="surname" class="mt-1"   type="text" data-validate="names" name="surname">
 									<p class="error-message">Formato incorrecto</p>
                                 </div>
                                 <div class="col-6 pos-relative">
-                                    <label for="telefono">Telefono</label>
-                                    <input id="telefono"  class="mt-1" type="text" data-validate="numbers">
+                                    <label for="phone">Telefono</label>
+                                    <input id="phone"  class="mt-1" type="tel" data-validate="numbers" name="phone">
 									<p class="error-message">Formato incorrecto</p>
                                 </div>
                                 <div class="col-6 pos-relative">
                                     <label for="email">Email</label>
-                                    <input id="email" class="mt-1" type="text" data-validate="emails">
+                                    <input id="email" class="mt-1" type="text" data-validate="emails" name="emails">
 									<p class="error-message">Formato incorrecto</p>
                                 </div>
-                                <div class="col-12 pos-relative">
-                                    <label for="mensaje" class="mb-2">Mensaje</label>
-									<span class="counter-text"><span class="counter-num">0</span><span>/250</span></span>
-                                    <textarea name="mensaje" id="mensaje" class="mt-1" maxlength="250"></textarea>
+                                <div class="col-6 pos-relative">
+                                    <label for="city" class="mb-2">Poblacion</label>
+									<input id="city" class="mt-1" type="text" name="city">
+                                </div>
+								<div class="col-6 pos-relative">
+                                    <label for="postalCode" class="mb-2">Códgo Postal</label>
+									<input id="postalCode" class="mt-1" type="text" name="postalCode">
+                                </div>
+								<div class="col-12 pos-relative">
+                                    <label for="address" class="mb-2">Dirección</label>
+									<input id="address" class="mt-1" type="text" name="address">
                                 </div>
                             </div>
                             <!-- FIN info + formulario -->
