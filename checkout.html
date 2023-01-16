@@ -155,7 +155,7 @@
                     <h1 class="text-align-center color-principal">Finalizar compra</h1>
                 </div>
                 <!-- Checkout content-->
-                <form action="http://127.0.0.1:8080/api/front/contacts">
+                <form action="http://127.0.0.1:8080/api/front/checkouts" class="checkout-form">
                     <!-- Contacto form -->
                     <div class="row contact mt-5">
                         <div class="col-6">
@@ -177,7 +177,7 @@
                                 </div>
                                 <div class="col-6 pos-relative">
                                     <label for="email">Email</label>
-                                    <input id="email" class="mt-1" type="text" data-validate="emails" name="emails">
+                                    <input id="email" class="mt-1" type="text" data-validate="emails" name="email">
 									<p class="error-message">Formato incorrecto</p>
                                 </div>
                                 <div class="col-6 pos-relative">
@@ -289,7 +289,7 @@
 				<p><a href="#">Ves a donde quieras</a></p>
 			</footer>
 			<!-- FIN footer -->
-			<script type="module" src="js/index.js"></script>
+			<script type="module" src="js/front/index.js"></script>
 		</body>
 	
 	</html>

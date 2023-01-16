@@ -1,6 +1,6 @@
-import { validateForm } from './validation3.js';
+import { validateForm } from './validation.js';
 
-export let renderForms = () => { 
+export let renderCheckoutForm = () => { 
 
     let submitForm = document.querySelector('#submitForm');
 

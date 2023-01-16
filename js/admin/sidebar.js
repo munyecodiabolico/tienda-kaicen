@@ -1,4 +1,4 @@
-export let renderSideBar = () => {
+export let renderSidebar = () => {
     // Despliegue menu lateral y boton hamburguesa
     let adminPanel = document.querySelector(".admin-panel");
     let sideBar = document.querySelector(".sidebar-menu");
