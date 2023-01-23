@@ -26,6 +26,106 @@ class Sidebar extends HTMLElement {
 
         this.shadow.innerHTML = 
         `
+        <style>
+        .sidebar-menu {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            height: 100vh;
+            width: 260px;
+            background: #303641;
+            box-shadow: 2px 0 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+          }
+          .sidebar-menu.collapsed {
+            left: -260px;
+          }
+          .sidebar-menu .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+          }
+          .sidebar-menu .sidebar-header .logo {
+            width: 70%;
+            height: 95px;
+          }
+          .sidebar-menu .nav {
+            width: 100%;
+          }
+          .sidebar-menu ul {
+            padding: 0;
+            list-style: none;
+          }
+          .sidebar-menu .list {
+            width: 100%;
+            padding: 0;
+          }
+          .sidebar-menu .list-item {
+            cursor: pointer;
+            overflow: hidden;
+          }
+          .sidebar-menu .list-button {
+            display: flex;
+            align-items: center;
+          }
+          .sidebar-menu .list-button, .sidebar-menu .list-inside {
+            background-color: rgba(125, 202, 43, 0.05);
+            margin-bottom: 1px;
+            transition: all 0.3s ease-in-out;
+          }
+          .sidebar-menu .list-button .nav-link, .sidebar-menu .list-inside .nav-link {
+            width: 100%;
+            display: flex;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 200;
+          }
+          .sidebar-menu .list-button:hover, .sidebar-menu .list-inside:hover {
+            background-color: rgba(125, 202, 43, 0.15);
+          }
+          .sidebar-menu .list-button:hover a, .sidebar-menu .list-inside:hover a {
+            color: #ffffff;
+          }
+          .sidebar-menu .list-button.active, .sidebar-menu .list-inside.active {
+            background-color: rgba(0, 0, 0, 0.15);
+          }
+          .sidebar-menu .list-button.active a, .sidebar-menu .list-inside.active a {
+            color: #ffffff;
+            font-weight: 400;
+          }
+          .sidebar-menu .list-button svg, .sidebar-menu .list-inside svg {
+            fill: #ffffff;
+          }
+          .sidebar-menu .arrow .list-arrow {
+            transform: rotate(90deg);
+          }
+          .sidebar-menu .list-arrow {
+            transition: all 0.3s ease-in-out;
+            transform: rotate(0deg);
+          }
+          .sidebar-menu .list-show {
+            background-color: rgba(125, 202, 43, 0.1);
+            border-left: 15px solid rgba(255, 255, 0, 0.3);
+            height: 0;
+            transition: all 0.3s ease-in-out;
+          }
+          .sidebar-menu .list-show-close {
+            height: 0px;
+          }
+          .sidebar-menu .list-inside {
+            background-color: rgba(125, 202, 43, 0.05);
+          }
+          .sidebar-menu .list-inside.active {
+            background-color: #22370c;
+          }
+          .sidebar-menu .list-inside:hover {
+            background-color: rgba(125, 202, 43, 0.25);
+          }
+          .sidebar-menu .list-inside:hover a {
+            color: #ffffff;
+          }
+        </style>
         <div class="sidebar-menu">
         <div class="sidebar-header">
             <div class="logo">
@@ -185,7 +285,69 @@ class Sidebar extends HTMLElement {
             </nav>
         </div>
     </div>
-        `;	
+        `;
+            // Despliegue menu lateral y boton hamburguesa
+            let adminPanel = document.querySelector(".admin-panel");
+            let sideBar = document.querySelector(".sidebar-menu");
+            let burger = document.querySelector(".hamburger");
+
+            burger.addEventListener('click', () => {
+                burger.classList.toggle("is-active");
+                adminPanel.classList.toggle("collapsed");
+                sideBar.classList.toggle("collapsed");
+            });
+        
+            let listElements = document.querySelectorAll(".list-button");
+            let listElementsSubmenus = document.querySelectorAll(".list-inside");
+        
+            listElements.forEach(listElement => {
+                listElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    let listElements = document.querySelectorAll(".list-button");
+                    listElements.forEach(listElement => {
+                        event.preventDefault();
+                        listElement.classList.remove("arrow");
+                        listElement.classList.remove("active");
+                        if (listElement.classList.contains("list-button-click")) {
+                            let menu = listElement.nextElementSibling;
+                            menu.style.height = "0";
+                        }
+                    });
+                    listElementsSubmenus.forEach(listElementSubmenu => {
+                        listElementSubmenu.classList.remove("active");
+                    });
+                    if (listElement.classList.contains("list-button-click")) {
+                        listElement.classList.toggle("arrow");
+                        listElement.classList.toggle("active");
+                        let height = 0;
+                        let menu = listElement.nextElementSibling;
+                        if (menu.clientHeight == "0") {
+                            height = menu.scrollHeight;
+                        } else {
+                            listElement.classList.toggle("arrow");
+                            listElement.classList.toggle("active");
+                        }
+                        menu.style.height = `${height}px`;
+                    } else {
+                        listElement.classList.toggle("active");
+                    }
+                });
+        
+            });
+        
+            listElementsSubmenus.forEach(listElementSubmenu => {
+                listElementSubmenu.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    listElementsSubmenus.forEach(listElementSubmenu => {
+                        listElementSubmenu.classList.remove("active");
+                    });
+                    listElementSubmenu.classList.toggle("active");
+                });
+            });
+        
+        
+        
+        }
     }
 }
 
