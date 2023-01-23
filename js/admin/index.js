@@ -10,3 +10,9 @@ renderNotification();
 renderSidebar();
 renderTabs();
 
+
+
+
+import './pageTitle.js';
+import './menu.js';
+

@@ -1,0 +1,16 @@
+
+WEBCOMPONENTS
+
+No se necesitan librerias y es compatible con frameworks tipo Vue, angular, react.
+
+Cada webcomponent tendra una clase con su constructor, posibles propiedades y metodos.
+
+El nombre de un customElement deben de ser compuestos por al menos dos palabrass unidas por un guion.
+
+En el constructor siempre saldran estas dos lineas
+
+ constructor() {
+        super(); // Traer todo el funcionamiento del htmlElement que es el padre
+        this.shadow = this.attachShadow({ mode: 'open' });
+        // Declaramos una propiedad(shadow) que podras usar en otra parte del codigo.
+        // this.attachShadow({ mode: 'open' }); // Crea un shadowDOM
