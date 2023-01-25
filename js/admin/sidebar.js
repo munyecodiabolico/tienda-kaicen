@@ -1,12 +1,12 @@
 export let renderSidebar = () => {
     // Despliegue menu lateral y boton hamburguesa
-    let adminPanel = document.querySelector(".admin-panel");
+    let mainContent = document.querySelector(".container-main");
     let sideBar = document.querySelector(".container-sidebar");
     let burger = document.querySelector(".hamburger");
     if (burger) {
         burger.addEventListener('click', () => {
             burger.classList.toggle("is-active");
-            adminPanel.classList.toggle("collapsed");
+            mainContent.classList.toggle("collapsed");
             sideBar.classList.toggle("collapsed");
         });
     };

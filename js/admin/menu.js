@@ -3,7 +3,8 @@ class Sidebar extends HTMLElement {
     constructor() {
         super();
         this.shadow = this.attachShadow({ mode: 'open' });
-        // this.title = this.getAttribute('title');
+        this.menu = this.getAttribute('menu');
+        this.menuItems = [];
     }
 
     // static get observedAttributes() { return ['title']; }
@@ -15,13 +16,27 @@ class Sidebar extends HTMLElement {
         //     this.setAttribute('title', event.detail.title);
         // }));
 
-        this.render();
+        this.loadData().then(() => this.render());
     }
 
     attributeChangedCallback(name, oldValue, newValue){
         this.render();
     }
 
+    async loadData(){
+        let url = `http://127.0.0.1:8080/api/admin/menus/display/${this.menu}`;
+
+        let response = await fetch(url, {
+            headers: {
+            "Authorization": "Bearer " + sessionStorage.getItem("accessToken"),
+            "Content-type": "application/json"
+            }
+        });
+        
+        let data = await response.json();
+        this.menuItems = Object.values(data);
+    }
+	
     render() {
 
         this.shadow.innerHTML = 
@@ -62,7 +77,7 @@ class Sidebar extends HTMLElement {
 
 
         .sidebar-menu {
-            position: fixed;
+            position: relative;
             left: 0;
             top: 0;
             z-index: 100;
@@ -264,62 +279,51 @@ class Sidebar extends HTMLElement {
             <div class="sidebar-main">
                 <nav class="nav">
                     <ul class="list">
-                        <li class="list-item">
-                            <div class="list-button"><a href="" class="nav-link" >Opcion-1</a></div>
-                        </li>
-                        <li class="list-item">
-                            <div class="list-button list-button-click d-flex justify-content-sm-between">
-                                <a href="" class="nav-link">Opcion-2</a>
-                                <svg class="list-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 16 16">
-                                        <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753l5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
-                                </svg>
-                            </div>
-                            <ul class="list-show">
-                                <li class="list-inside">
-                                    <a href="" class="nav-link nav-link-inside">Opcion-2-1</a>
-                                </li>
-                                <li class="list-inside">
-                                    <a href="" class="nav-link nav-link-inside">Opcion-2-2</a>
-                                </li>
-                                <li class="list-inside">
-                                    <a href="" class="nav-link nav-link-inside">Opcion-2-3</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="list-item">
-                            <div class="list-button"><a href="" class="nav-link">Opcion-3</a></div>
-                        </li>
-                        <li class="list-item">
-                            <div class="list-button"><a href="" class="nav-link">Opcion-4</a></div>
-                        </li>
-                        <li class="list-item">
-                            <div class="list-button list-button-click d-flex justify-content-sm-between ">
-                                <a href="" class="nav-link">Opcion-5</a>
-                                <svg class="list-arrow"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff" viewBox="0 0 16 16">
-                                    <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753l5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
-                                </svg>
-                            </div>
-                            <ul class="list-show">
-                                <li class="list-inside">
-                                    <a href="" class="nav-link nav-link-inside">Opcion-5-1</a>
-                                </li>
-                                <li class="list-inside">
-                                    <a href="" class="nav-link nav-link-inside">Opcion-5-2</a>
-                                </li>
-                                <li class="list-inside">
-                                    <a href="" class="nav-link nav-link-inside">Opcion-5-3</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="list-item">
-                            <div class="list-button"><a href="" class="nav-link">Opcion-6</a></div>
-                        </li>
+                       
                     </ul>
                 </nav>
             </div>
         </div>
-
         `;
+
+        let list = this.shadow.querySelector(".list");
+		
+        this.menuItems.forEach( menuItem => {
+
+
+            let listItem = document.createElement("li");
+            listItem.classList.add("list-item");
+
+            let listButton = document.createElement("div");
+            listButton.classList.add("list-button");
+            
+            let link = document.createElement("a");
+            link.classList.add("nav-link");
+
+            if(menuItem.customUrl){
+
+                link.href = menuItem.customUrl;
+				link.textContent = menuItem.name
+				listItem.append(listButton);
+				listButton.append(link);
+				list.append(listItem);
+           
+			}else{
+				link.textContent = menuItem.name
+				listItem.append(listButton);
+				listButton.append(link);
+				list.append(listItem);
+			}
+
+			if(menuItem.children.length > 0){
+
+				menuItems.forEach( menuItem => {
+
+				console.log(menuItem.children);
+			}
+        });
+
+
         // Despliegue menu lateral y boton hamburguesa
         // let adminPanel = this.shadow.querySelector(".admin-panel");
         let sideBar = this.shadow.querySelector(".sidebar-menu");
