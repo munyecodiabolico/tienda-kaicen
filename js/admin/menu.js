@@ -36,6 +36,7 @@ class Sidebar extends HTMLElement {
         let data = await response.json();
         this.menuItems = Object.values(data);
     }
+
 	
     render() {
 
@@ -295,32 +296,31 @@ class Sidebar extends HTMLElement {
             listItem.classList.add("list-item");
 
             let listButton = document.createElement("div");
-            listButton.classList.add("list-button");
-            
             let link = document.createElement("a");
             link.classList.add("nav-link");
-
+            
             if(menuItem.customUrl){
-
+                
+                listButton.classList.add("list-button");
                 link.href = menuItem.customUrl;
 				link.textContent = menuItem.name
 				listItem.append(listButton);
 				listButton.append(link);
 				list.append(listItem);
-           
+                
 			}else{
-				link.textContent = menuItem.name
+                listButton.classList.add("list-button","list-button-click","d-flex","justify-content-sm-between");
+
+                link.textContent = menuItem.name
 				listItem.append(listButton);
 				listButton.append(link);
 				list.append(listItem);
+
+                this.menuRecursivo(menuItem, listItem);
+                
+                list.append(listItem);
 			}
 
-			if(menuItem.children.length > 0){
-
-				menuItems.forEach( menuItem => {
-
-				console.log(menuItem.children);
-			}
         });
 
 
@@ -404,6 +404,32 @@ class Sidebar extends HTMLElement {
                 }));
             });
         });  
+    }
+
+    menuRecursivo(elemento, listItem) {
+     
+        if(elemento.children){
+
+            let submenu = document.createElement("ul");
+            submenu.classList.add("list-show");
+
+            listItem.append(submenu);
+    
+            elemento.children.forEach( element => {
+                let subelemento = document.createElement("li");
+                subelemento.classList.add("list-inside");
+
+                let subelementoLink = document.createElement("a");
+                subelementoLink.classList.add("nav-link");
+                subelementoLink.classList.add("nav-link-inside");
+                subelementoLink.textContent = element.name;
+
+                subelemento.append(subelementoLink);
+                submenu.append(subelemento);
+
+                this.menuRecursivo(element, subelemento);
+            });
+        };
     }
 }
 
