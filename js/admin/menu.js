@@ -307,6 +307,9 @@ class Sidebar extends HTMLElement {
 				listItem.append(listButton);
 				listButton.append(link);
 				list.append(listItem);
+
+                this.menuRecursivo(menuItem, listItem);
+
                 
 			}else{
                 listButton.classList.add("list-button","list-button-click","d-flex","justify-content-sm-between");
@@ -316,8 +319,10 @@ class Sidebar extends HTMLElement {
 				listButton.append(link);
 				list.append(listItem);
 
+                console.log("hola")
+
                 this.menuRecursivo(menuItem, listItem);
-                
+
                 list.append(listItem);
 			}
 
@@ -410,12 +415,15 @@ class Sidebar extends HTMLElement {
      
         if(elemento.children){
 
+            console.log(elemento);
+
             let submenu = document.createElement("ul");
             submenu.classList.add("list-show");
 
             listItem.append(submenu);
     
             elemento.children.forEach( element => {
+                console.log(elemento.children);
                 let subelemento = document.createElement("li");
                 subelemento.classList.add("list-inside");
 
@@ -430,8 +438,42 @@ class Sidebar extends HTMLElement {
                 this.menuRecursivo(element, subelemento);
             });
         };
+        
     }
+
+
+    // menuRecursivo(elemento, listItem) {
+     
+    //     if(elemento.children){
+
+    //         console.log(element)
+
+    //         let submenu = document.createElement("ul");
+    //         submenu.classList.add("list-show");
+
+    //         listItem.append(submenu);
+    
+    //         elemento.children.forEach( element => {
+    //             let subelemento = document.createElement("li");
+    //             subelemento.classList.add("list-inside");
+
+    //             let subelementoLink = document.createElement("a");
+    //             subelementoLink.classList.add("nav-link");
+    //             subelementoLink.classList.add("nav-link-inside");
+    //             subelementoLink.textContent = element.name;
+
+    //             subelemento.append(subelementoLink);
+    //             submenu.append(subelemento);
+
+    //             this.menuRecursivo(element, subelemento);
+    //         });
+    //     };
+    // }
+
+
 }
+
+
 
 customElements.define('sidebar-component', Sidebar);
 
