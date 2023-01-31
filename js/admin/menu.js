@@ -1,3 +1,5 @@
+import {API_URL} from "../../config/config.js";
+
 class Sidebar extends HTMLElement {
 
     constructor() {
@@ -7,24 +9,13 @@ class Sidebar extends HTMLElement {
         this.menuItems = [];
     }
 
-    // static get observedAttributes() { return ['title']; }
-
-    // Cuando
     connectedCallback() {
-        
-        // document.addEventListener("newUrl",( event =>{
-        //     this.setAttribute('title', event.detail.title);
-        // }));
 
         this.loadData().then(() => this.render());
     }
 
-    attributeChangedCallback(name, oldValue, newValue){
-        this.render();
-    }
-
     async loadData(){
-        let url = `http://127.0.0.1:8080/api/admin/menus/display/${this.menu}`;
+        let url = `${API_URL}/api/admin/menus/display/${this.menu}`;
 
         let response = await fetch(url, {
             headers: {
@@ -291,41 +282,24 @@ class Sidebar extends HTMLElement {
 		
         this.menuItems.forEach( menuItem => {
 
-
             let listItem = document.createElement("li");
             listItem.classList.add("list-item");
 
             let listButton = document.createElement("div");
             let link = document.createElement("a");
             link.classList.add("nav-link");
-            
-            if(menuItem.customUrl){
-                
-                listButton.classList.add("list-button");
-                link.href = menuItem.customUrl;
-				link.textContent = menuItem.name
-				listItem.append(listButton);
-				listButton.append(link);
-				list.append(listItem);
+  
+            listButton.classList.add("list-button","list-button-click","d-flex","justify-content-sm-between");
 
-                this.menuRecursivo(menuItem, listItem);
+            link.textContent = menuItem.name
+            listItem.append(listButton);
+            listButton.append(link);
+            list.append(listItem);
 
-                
-			}else{
-                listButton.classList.add("list-button","list-button-click","d-flex","justify-content-sm-between");
 
-                link.textContent = menuItem.name
-				listItem.append(listButton);
-				listButton.append(link);
-				list.append(listItem);
+            this.menuRecursivo(menuItem, listItem);
 
-                console.log("hola")
-
-                this.menuRecursivo(menuItem, listItem);
-
-                list.append(listItem);
-			}
-
+            list.append(listItem);
         });
 
 
@@ -342,6 +316,7 @@ class Sidebar extends HTMLElement {
         
         let listElements = this.shadow.querySelectorAll(".list-button");
         let listElementsSubmenus = this.shadow.querySelectorAll(".list-inside");
+        let links = this.shadow.querySelectorAll(".nav-link"); 
     
         listElements.forEach(listElement => {
 
@@ -393,18 +368,20 @@ class Sidebar extends HTMLElement {
     
         });
         
-        listElementsSubmenus.forEach(listElementSubmenu => {
-            listElementSubmenu.addEventListener('click', (event) => {
+        links.forEach(link => {
+            link.addEventListener('click', (event) => {
                 event.preventDefault();
-                listElementsSubmenus.forEach(listElementSubmenu => {
-                    listElementSubmenu.classList.remove("active");
-                });
-                listElementSubmenu.classList.toggle("active");
-                console.log(listElementSubmenu);
-                var pageTitle = this.shadow.querySelector(".list-inside.active .nav-link").innerHTML;
+
+                // listElementsSubmenus.forEach(listElementSubmenu => {
+                //     listElementSubmenu.classList.remove("active");
+                // });
+
+                // listElementSubmenu.classList.toggle("active");
+
                 document.dispatchEvent(new CustomEvent('newUrl', {
                     detail: {
-                        title: pageTitle
+                        title: link.textContent,
+                        url: link.getAttribute("href")
                     }
                 }));
             });
@@ -415,116 +392,34 @@ class Sidebar extends HTMLElement {
      
         if(elemento.children){
 
-            console.log(elemento);
-
             let submenu = document.createElement("ul");
             submenu.classList.add("list-show");
 
             listItem.append(submenu);
-    
-            elemento.children.forEach( element => {
-                console.log(elemento.children);
+
+            for (const item in elemento.children) {
+
                 let subelemento = document.createElement("li");
                 subelemento.classList.add("list-inside");
-
+    
                 let subelementoLink = document.createElement("a");
                 subelementoLink.classList.add("nav-link");
                 subelementoLink.classList.add("nav-link-inside");
-                subelementoLink.textContent = element.name;
-
+                subelementoLink.textContent = elemento.children[item].name;
+                subelementoLink.href = elemento.children[item].customUrl;
+    
                 subelemento.append(subelementoLink);
                 submenu.append(subelemento);
+    
+                this.menuRecursivo(item, subelemento);
 
-                this.menuRecursivo(element, subelemento);
-            });
+            }
+    
         };
         
     }
-
-
-    // menuRecursivo(elemento, listItem) {
-     
-    //     if(elemento.children){
-
-    //         console.log(element)
-
-    //         let submenu = document.createElement("ul");
-    //         submenu.classList.add("list-show");
-
-    //         listItem.append(submenu);
-    
-    //         elemento.children.forEach( element => {
-    //             let subelemento = document.createElement("li");
-    //             subelemento.classList.add("list-inside");
-
-    //             let subelementoLink = document.createElement("a");
-    //             subelementoLink.classList.add("nav-link");
-    //             subelementoLink.classList.add("nav-link-inside");
-    //             subelementoLink.textContent = element.name;
-
-    //             subelemento.append(subelementoLink);
-    //             submenu.append(subelemento);
-
-    //             this.menuRecursivo(element, subelemento);
-    //         });
-    //     };
-    // }
-
-
 }
 
 
 
 customElements.define('sidebar-component', Sidebar);
-
-
-// class PageTitle extends HTMLElement {
-//     // constructor de la clase, se ejecuta al crear una nueva instancia de PageTitle
-//     constructor() {
-//         super(); // llama al constructor de la clase padre, HTMLElement
-//         this.shadow = this.attachShadow({ mode: 'open' }); // Crea un shadow DOM para el elemento y lo asigna a la propiedad shadow
-//         this.title = this.getAttribute('title'); // Obtiene el valor del atributo "title" del elemento y lo asigna a la propiedad title
-//     }
-
-//     // Método estático que especifica los atributos que serán observados para detectar cambios
-//     static get observedAttributes() { return ['title']; }
-
-//     // Método que se ejecuta cuando el elemento es agregado al DOM
-//     connectedCallback() {
-//         // Escucha el evento "newUrl" y actualiza el atributo "title" del elemento con el detalle del evento
-//         document.addEventListener("newUrl",( event =>{
-//             this.setAttribute('title', event.detail.title);
-//         }));
-
-//         this.render(); // Llama al método render
-//     }
-
-//     // Método que se ejecuta cuando alguno de los atributos observados cambia
-//     attributeChangedCallback(name, oldValue, newValue){
-//         this.render(); // Llama al método render
-//     }
-
-//     // Método que se encarga de dibujar el elemento en el shadow DOM
-//     render() {
-//         // Establece el contenido HTML y CSS del elemento. En este caso, se establece el contenido como una etiqueta "h2" con el valor del atributo "title" y un estilo para el texto dentro de ella.
-//         this.shadow.innerHTML = 
-//         `
-//         <style>
-//             h2 {   
-//                 color: hsl(0, 0%, 100%);
-//                 font-family: 'Ubuntu';
-//                 font-size: 2em;
-//                 font-weight: 600;
-//                 margin: 0;
-//                 text-decoration: none;
-//                 text-align:center;
-//             }
-//         </style>
-
-//         <h2>${this.title}</h2>
-//         `;	
-//     }
-// }
-
-// //Registra el elemento personalizado con el nombre "page-title-component" y asociarlo con la clase "PageTitle"
-// customElements.define('page-title-component', PageTitle);

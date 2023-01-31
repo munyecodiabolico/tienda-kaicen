@@ -10,10 +10,8 @@ renderForms();
 renderSidebar();
 renderTabs();
 
-
-
-
 import './pageTitle.js';
 import './menu.js';
+import './table.js';
 import './notificationComponent.js'
 
