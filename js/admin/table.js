@@ -139,7 +139,6 @@ class Table extends HTMLElement {
             };
         
             
-            buttonTrash.setAttribute("id", element.id);
             buttonEdit.setAttribute("id", element.id);
 
             optionsItem.classList.add("options");

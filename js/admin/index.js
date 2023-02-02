@@ -13,5 +13,6 @@ renderTabs();
 import './pageTitle.js';
 import './menu.js';
 import './table.js';
+import './dataForm.js';
 import './notificationComponent.js'
 
