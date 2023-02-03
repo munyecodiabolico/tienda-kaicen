@@ -1,17 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-	<link href="assets/css/app.css" rel="stylesheet">
-</head>
-<body>
-    <login-form-component url="/api/admin/users"></login-form-component>
-    <!-- <div class="login d-flex justify-content-center align-items-center">
-        <form class="formulario login-form" action="http://127.0.0.1:8080/api/admin/taxes">
+import {API_URL} from "../../config/config.js";
+
+class LoginForm extends HTMLElement {
+
+    constructor() {
+        super();
+        this.shadow = this.attachShadow({ mode: 'open' });
+    }
+
+
+    connectedCallback() {
+        this.render();
+    }
+
+    attributeChangedCallback(name, oldValue, newValue){
+        this.render();
+    }
+
+	
+    async render() {
+
+        this.shadow.innerHTML = 
+        `
+        <style>
+        *{
+            box-sizing: border-box;
+        }
+        .error-message {
+            font-size: 0.6rem;
+            color: #ff0000;
+            position: absolute;
+            bottom: 7px;
+            display: none;
+            text-align: right;
+            right: 14px;
+        }
+        .d-block {
+            display: block !important;
+        }
+        .btn {
+            font-size: 1rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            background-color: #454545;
+          }
+          
+          .btn-sm {
+            font-size: 90%;
+            padding: 0.7rem 1.5rem;
+          }
+          
+          .btn-lg {
+            font-size: 1.5rem;
+          }
+          
+          .btn-principal {
+            border: 3px solid #ffffff;
+            background-color: #7dca2b;
+            color: #ffffff;
+            margin-top: 3rem;
+          }
+          .btn-principal:hover {
+            background-color: #63a022;
+          }
+          .btn-principal:focus {
+            background-color: #497619;
+          }
+          
+        .login {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-color: #b2e982;
+            display:grid;
+            place-content:center;
+        }
+        .login .formulario {
+            background-color: white;
+            width: 90vw;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        @media (min-width: 992px) {
+        .login .formulario {
+            width: 30vw;
+        }
+        }
+        .login .formulario .logo-img {
+            width: 70%;
+            margin: auto;
+        }
+        .login .formulario .svg-img {
+            width: 100%;
+        }
+        .login .formulario h1 {
+            font-size: 1.5rem;
+        }
+        .login .formulario input {
+            border-radius: 5px;
+            border: none;
+            background-color: rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            width: 100%;
+        }
+        .login .formulario .checkbox {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .login .formulario label {
+            margin-top: 1rem;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+        .login .formulario input[type=checkbox] {
+            width: auto;
+        }
+        </style>
+        <div class="login">
+        <form id="login-form" class="formulario login-form">
             <div class="col logo-img p-1">								
                 <svg class="svg-img" version="1.1"
                 id="svg2" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:ns1="http://sozi.baierouge.fr" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
@@ -108,32 +218,74 @@
                 </g>
                 </svg>
             </div>
-          <h1 class="mb-4">Please sign in</h1>
-      
-          <div>
-            <label class="d-block" for="email">Email address</label>
-            <input id="email" type="email" class="form-control" name ="email" placeholder="name@example.com" data-validate="emails">
-            <p class="error-message">Formato incorrecto</p>
-          </div>
-          <div>
-            <label class="d-block" for="password">Password</label>
-            <input id="password" type="password" class="form-control" id="password" placeholder="Password" name ="password">
-          </div>
-      
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
-          <button id="submitLoginForm" class="w-100 btn btn-lg btn-principal btn-sm">Sign in</button>
-        </form>
-      </main>
-      <div id="notification-wrapper" class="notification-wrapper">
-        <div id="notification" class="notification">
-            <img src="img/sobre.png" alt="">
-            <p id="notification-message"></p>
+            <h1 class="mb-4">Please sign in</h1>
+        
+            <div>
+                <label class="d-block" for="email">Email address</label>
+                <input id="email" type="email" class="form-control" name ="email" placeholder="name@example.com" data-validate="emails">
+                <p class="error-message">Formato incorrecto</p>
+            </div>
+            <div>
+                <label class="d-block" for="password">Password</label>
+                <input id="password" type="password" class="form-control" id="password" placeholder="Password" name ="password">
+            </div>
+        
+            <!-- <div class="checkbox">
+                <label>
+                <input type="checkbox" value="remember-me"> Remember me
+                </label>    º
+            </div> -->
+            <button id="submitLoginForm" class="w-100 btn btn-lg btn-principal btn-sm">Sign in</button>
+            </form>
+        </main>
+        <div id="notification-wrapper" class="notification-wrapper">
+            <div id="notification" class="notification">
+                <img src="img/sobre.png" alt="">
+                <p id="notification-message"></p>
+            </div>
         </div>
-    </div> -->
-      <script type="module" src="js/front/index.js"></script>
-</body>
-</html>
+
+        `;
+
+        let submitForm = this.shadow.querySelector('#submitLoginForm');
+
+        if (submitForm) {
+                
+            submitForm.addEventListener('click', event => {
+        
+                event.preventDefault();
+
+                let form = this.shadow.querySelector('#login-form');
+                let formData = new FormData(form);
+                let formDataJson = Object.fromEntries(formData.entries());
+
+                fetch('http://127.0.0.1:8080/api/auth/users/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formDataJson)
+                }).then(response => {
+                    return response.json();
+                }).then(data => {
+                    if(data.accessToken){
+                        sessionStorage.setItem('accessToken', data.accessToken);
+                        window.location.href = `admin-panel.html`;
+                    }else{
+                        console.log("uy que mal")
+                    }        
+                }).catch(error => {
+                    console.log(error);
+                });
+            });
+
+        }
+        
+    }
+
+}
+
+customElements.define('login-form-component', LoginForm);
+
+
+

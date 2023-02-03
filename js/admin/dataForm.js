@@ -218,15 +218,7 @@ class DataForm extends HTMLElement {
                 <form action="http://127.0.0.1:8080/api/admin/users" class="forms admin-form">
                     <div class="barra-opciones" >
                         <div class="tabs-wrapper">
-                            <div class="item active tabs" data-content="item1">
-                                Contenido
-                            </div>
-                            <div class="item d-inline-block tabs" data-content="item2">
-                                Imágenes
-                            </div>
-                            <div class="item d-inline-block tabs" data-content="item3">
-                                SEO
-                            </div>
+                            
                         </div>
 <!--                  <div class="options">
                             <label class="on-off" for="toggle">
@@ -235,7 +227,7 @@ class DataForm extends HTMLElement {
                             </label>
                         </div>
                     </div>
-                    <div>
+                    <div class="data-tabs-content">
                        <div class="item-content active cont-tabs" data-content="item1">
                             <div class="pos-relative">
                                 <label for="nombre">Nombre</label>
@@ -268,28 +260,20 @@ class DataForm extends HTMLElement {
 
         let form = this.shadow.querySelector(".tabs-wrapper");
         let formStructure =  await this.setFormStructure();
+
         Object.keys(formStructure.tabs).forEach(key =>{
             
             let item = document.createElement("div");
-            item.classList.add("item,active,tabs");
+            item.classList.add("item","tabs");
             item.setAttribute("data-content", key);
+            item.textContent = `${formStructure.tabs[key].label}`;
+            form.append(item);
 
-            ********************
-
-
-
-
-
-
-
-
-
-
-
-
-
-            console.log(formStructure.tabs[key].label);
+            formStructure.tabsContent[key];
+            
         });
+
+        this.shadow.querySelector('.tabs').classList.add("active");
 
         this.renderTabs();
 
@@ -302,15 +286,17 @@ class DataForm extends HTMLElement {
         let itemContents = this.shadow.querySelectorAll(".cont-tabs");
     
         items.forEach(item => {
+
             item.addEventListener("click", () => {
+
                 let itemActivo = item.dataset.content;
+
                 items.forEach(item => {
-                    if (item.dataset.content == itemActivo) {
-                        item.classList.add("active");
-                    } else {
-                        item.classList.remove("active");
-                    };
+                    item.classList.remove('active');
                 });
+
+                item.classList.add('active');
+
                 itemsContents.forEach(itemContent => {
                     if (itemContent.dataset.content == itemActivo) {
                         itemContent.classList.add("active");
@@ -336,7 +322,6 @@ class DataForm extends HTMLElement {
                         main: {
                             label: 'Principal',
                         }
-
                     },
 
                     tabsContent: {
