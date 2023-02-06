@@ -143,7 +143,7 @@ class DataForm extends HTMLElement {
             background-color: rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
           }
-          .forms input[type=radio] {
+          .forms input[type=radio], .forms input[type=checkbox] {
             width: auto;
           }
           .forms textarea {
@@ -220,16 +220,20 @@ class DataForm extends HTMLElement {
                         <div class="tabs-wrapper">
                             
                         </div>
-<!--                  <div class="options">
-                            <label class="on-off" for="toggle">
-                                <input id="toggle" type="checkbox">
-                                <span class="slider"></span>
-                            </label>
+                        <div class="options">
+                                <label class="on-off" for="toggle">
+                                    <input id="toggle" type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="data-tabs-content">
-                       <div class="item-content active cont-tabs" data-content="item1">
-                            <div class="pos-relative">
+                        <div class="data-tabs-content">
+                        
+                        
+
+
+                        <!-- <div class="item-content active cont-tabs" data-content="item1">
+                            <div class="inputsWrapper">
                                 <label for="nombre">Nombre</label>
                                 <input id="nombre" type="text" name="name" data-validate="names">
                                 <p class="error-message">Formato incorrecto</p>
@@ -239,7 +243,7 @@ class DataForm extends HTMLElement {
                                 <label for="pass">Password</label>
                                 <input id="pass" type="password"  name="password" data-validate="passwords">
                                 <p class="error-message">Formato incorrecto</p>
-                            </div>
+                            </div>    
                         </div>
                         <div class="item-content cont-tabs" data-content="item2">
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis illum ut omnis consectetur tempora? Voluptatibus!
@@ -247,6 +251,9 @@ class DataForm extends HTMLElement {
                         <div class="item-content cont-tabs" data-content="item3">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nihil officia hic expedita minus perspiciatis suscipit nemo a ea doloremque. Neque doloremque quia soluta enim est eum suscipit eos necessitatibus.
                         </div>
+
+
+
                     </div>
                     <div class="footer">
                         <button id="submitForm" class="save">GUARDAR</button>
@@ -269,11 +276,132 @@ class DataForm extends HTMLElement {
             item.textContent = `${formStructure.tabs[key].label}`;
             form.append(item);
 
-            formStructure.tabsContent[key];
-            
+            //Creando un tabContent 
+            let itemContents = this.shadow.querySelector(".data-tabs-content");
+            Object.values(formStructure.tabsContent[key].rows).forEach(row => {
+
+                // Creando una fila
+                let inputsGroup = document.createElement("div");
+                inputsGroup.classList.add("row");
+                
+                Object.keys(row.formElements).forEach(item => {
+                    
+                    let formElement = row.formElements[item];
+                    
+                    switch (formElement.element) {
+
+                        case "input":
+
+                            if (formElement.type == "checkbox"){
+
+                                let input = document.createElement("input");
+
+                                if(formElement.options.length > 1) {
+                                    let fieldset = document.createElement("fieldset");
+                                    fieldset.textContent = item.label;
+                                    fieldset.setAttribute("id", item);
+                                    inputsGroup.append(fieldset);
+
+                                    formElement.options.forEach( option => {
+                                        input.setAttribute("id", option.label);
+                                        input.setAttribute("name", option.value);
+                                        input.setAttribute("type", formElement.type);
+                                        console.log(input);
+                                        inputsGroup.append(input);
+                                    })
+                                }
+                                
+                                let label = document.createElement("label");
+                                label.setAttribute("for", item);
+                                label.append(input);
+                                label.textContent = formElement.label;
+                                
+                                inputsGroup.append(input);
+                                inputsGroup.append(label);
+
+                            } else if (formElement.type == "radio") {
+
+                            } else {
+                                // let label = document.createElement("label");
+                                // label.setAttribute("for", item);
+                                // label.textContent = formElement.label;
+    
+                                // let input = document.createElement("input");
+                                // input.setAttribute("id",item);
+                                // input.setAttribute("name",item);
+                                // input.setAttribute("type",formElement.type);
+                                // inputsGroup.append(label);
+                                // inputsGroup.append(input);
+
+                            };
+
+
+                            // if (formElement.options) {
+                            //     Object.values(formElement.options).forEach(option => {
+                            //         console.log(option.label);
+                            //     })
+                            // }
+                            break;
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        case "select":
+                            let select = document.createElement("select");
+                            // inputsGroup.append(select);
+                            break;
+                        case "textarea":
+                            let textarea = document.createElement("textarea");
+                            // inputsGroup.append(select);
+                            break;
+                        default:
+                            console.log("Hoy no es lunes, martes ni miércoles");
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                });
+
+                itemContents.append(inputsGroup);
+            });
         });
 
         this.shadow.querySelector('.tabs').classList.add("active");
+
+        // Object.keys(formStructure.tabsContent).forEach(key =>{
+        //     
+        //     let itemContent = document.createElement("div");
+        //     itemContent.classList.add("item-content","cont-tabs");
+        //     itemContent.setAttribute("data-content", key);
+        //     let inputsWrapper = document.createElement("div");
+        //     inputsWrapper.classList.add("inputsWrapper");
+            
+
+        //     itemContent.append(inputsWrapper);
+
+        //     itemContents.append(itemContent);
+        // });
 
         this.renderTabs();
 
@@ -290,6 +418,7 @@ class DataForm extends HTMLElement {
             item.addEventListener("click", () => {
 
                 let itemActivo = item.dataset.content;
+                console.log(itemActivo);
 
                 items.forEach(item => {
                     item.classList.remove('active');
@@ -297,7 +426,7 @@ class DataForm extends HTMLElement {
 
                 item.classList.add('active');
 
-                itemsContents.forEach(itemContent => {
+                itemContents.forEach(itemContent => {
                     if (itemContent.dataset.content == itemActivo) {
                         itemContent.classList.add("active");
                     } else {
@@ -321,6 +450,9 @@ class DataForm extends HTMLElement {
                     tabs:{
                         main: {
                             label: 'Principal',
+                        },
+                        secundario: {
+                            label: 'secundario',
                         }
                     },
 
@@ -552,6 +684,35 @@ class DataForm extends HTMLElement {
                                             maxLength: 100,
                                             placeholder: '',
                                             required: true
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        secundario: {
+                            rows:{
+                                row1: {
+                                    formElements:{
+                                        idSecund:{
+                                            element: 'input',
+                                            type: 'hidden',
+                                        },
+                                        nameSecund: {
+                                            label: 'Nombre',
+                                            element: 'input',
+                                            maxLength: '10',
+                                            type: 'text',
+                                            placeholder: '',
+                                            required: true,
+                                            validate: 'only-letters'
+                                        },
+                                        emailSecund: {
+                                            label: 'Email',
+                                            element: 'input',
+                                            type: 'email',
+                                            placeholder: '',
+                                            required: true,
+                                            validate: 'email'
                                         }
                                     }
                                 }
