@@ -24,20 +24,17 @@ class DataForm extends HTMLElement {
         this.shadow.innerHTML = 
         `
         <style>
+        * {
+            box-sizing:border-box;
+        }
         .row {
-            --bs-gutter-x: 1.5rem;
-            --bs-gutter-y: 0;
             display: flex;
-            flex-wrap: wrap;
-            margin-top: calc(var(--bs-gutter-y) * -1);
-            margin-right: calc(var(--bs-gutter-x) * -0.5);
-            margin-left: calc(var(--bs-gutter-x) * -0.5);
+            flex-grow: 1;
         }
         .col-12 {
             flex: 0 0 auto;
             width: 100%;
         }
-        
         .barra-opciones {
             display:flex;
             justify-content:space-between;
@@ -45,6 +42,11 @@ class DataForm extends HTMLElement {
         }
         .tabs-wrapper {
             display:flex;
+        }
+        .data-tabs-content {
+            display:flex;
+            flex: 1 0 auto;
+            width: 100%;
         }
         .item {
             padding: 1rem;
@@ -220,6 +222,7 @@ class DataForm extends HTMLElement {
                         <div class="tabs-wrapper">
                             
                         </div>
+                        
                         <div class="options">
                                 <label class="on-off" for="toggle">
                                     <input id="toggle" type="checkbox">
@@ -229,36 +232,8 @@ class DataForm extends HTMLElement {
                         </div>
                         <div class="data-tabs-content">
                         
-                        
-
-
-                        <!-- <div class="item-content active cont-tabs" data-content="item1">
-                            <div class="inputsWrapper">
-                                <label for="nombre">Nombre</label>
-                                <input id="nombre" type="text" name="name" data-validate="names">
-                                <p class="error-message">Formato incorrecto</p>
-                                <label for="email">Email</label>
-                                <input id="email" type="text"  name="email" data-validate="emails">
-                                <p class="error-message">Formato incorrecto</p>
-                                <label for="pass">Password</label>
-                                <input id="pass" type="password"  name="password" data-validate="passwords">
-                                <p class="error-message">Formato incorrecto</p>
-                            </div>    
                         </div>
-                        <div class="item-content cont-tabs" data-content="item2">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis illum ut omnis consectetur tempora? Voluptatibus!
-                        </div>
-                        <div class="item-content cont-tabs" data-content="item3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, nihil officia hic expedita minus perspiciatis suscipit nemo a ea doloremque. Neque doloremque quia soluta enim est eum suscipit eos necessitatibus.
-                        </div>
-
-
-
                     </div>
-                    <div class="footer">
-                        <button id="submitForm" class="save">GUARDAR</button>
-                        <button class="reset">RESET</button>
-                    </div>-->
                 </form>
             </div>
         </div>
@@ -270,19 +245,26 @@ class DataForm extends HTMLElement {
 
         Object.keys(formStructure.tabs).forEach(key =>{
             
+            let itemContents = this.shadow.querySelector(".data-tabs-content");
+            
             let item = document.createElement("div");
             item.classList.add("item","tabs");
             item.setAttribute("data-content", key);
             item.textContent = `${formStructure.tabs[key].label}`;
             form.append(item);
 
+            // Creando contenedor del contenido de un tab
+            let tabContent = document.createElement("div");
+            tabContent.classList.add("item-content");
+            itemContents.append(tabContent);
+
             //Creando un tabContent 
-            let itemContents = this.shadow.querySelector(".data-tabs-content");
             Object.values(formStructure.tabsContent[key].rows).forEach(row => {
 
                 // Creando una fila
                 let inputsGroup = document.createElement("div");
                 inputsGroup.classList.add("row");
+                tabContent.append(inputsGroup);
                 
                 Object.keys(row.formElements).forEach(item => {
                     
@@ -294,31 +276,36 @@ class DataForm extends HTMLElement {
 
                             if (formElement.type == "checkbox"){
 
-                                let input = document.createElement("input");
-
                                 if(formElement.options.length > 1) {
+
                                     let fieldset = document.createElement("fieldset");
-                                    fieldset.textContent = item.label;
+                                    let legend = document.createElement("legend");
+                                    fieldset.append(legend)
+
+                                    legend.textContent = formElement.label;
                                     fieldset.setAttribute("id", item);
                                     inputsGroup.append(fieldset);
 
                                     formElement.options.forEach( option => {
+
+                                        let input = document.createElement("input");
+                                        let label = document.createElement("label");
+
+                                        label.setAttribute("for", item);
+                                        label.append(input);
+                                        label.textContent = option.label;
+                                
                                         input.setAttribute("id", option.label);
                                         input.setAttribute("name", option.value);
                                         input.setAttribute("type", formElement.type);
-                                        console.log(input);
-                                        inputsGroup.append(input);
-                                    })
+
+                                        fieldset.append(input);
+                                        fieldset.append(label);
+                                        inputsGroup.append(fieldset);
+                                    });
                                 }
                                 
-                                let label = document.createElement("label");
-                                label.setAttribute("for", item);
-                                label.append(input);
-                                label.textContent = formElement.label;
-                                
-                                inputsGroup.append(input);
-                                inputsGroup.append(label);
-
+                    
                             } else if (formElement.type == "radio") {
 
                             } else {
@@ -383,11 +370,13 @@ class DataForm extends HTMLElement {
 
                 });
 
-                itemContents.append(inputsGroup);
             });
+
+
         });
 
         this.shadow.querySelector('.tabs').classList.add("active");
+        this.shadow.querySelector('.item-content').classList.add("active");
 
         // Object.keys(formStructure.tabsContent).forEach(key =>{
         //     
