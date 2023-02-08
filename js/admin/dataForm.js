@@ -27,13 +27,27 @@ class DataForm extends HTMLElement {
         * {
             box-sizing:border-box;
         }
+        .d-none {
+            display:none;
+        }
         .row {
             display: flex;
-            flex-grow: 1;
+            gap:1rem;
+        }
+        .row > div,
+        .row > fieldset {
+            flex-grow:1;
+        }
+
+        .row > fieldset {
+            margin-bottom:1rem;
         }
         .col-12 {
             flex: 0 0 auto;
             width: 100%;
+        }
+        label {
+            font-size:.8rem;
         }
         .barra-opciones {
             display:flex;
@@ -49,12 +63,12 @@ class DataForm extends HTMLElement {
             width: 100%;
         }
         .item {
-            padding: 1rem;
+            padding: 16px;
             text-decoration: none;
             text-align: center;
             background-color: #ddd;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
+            border-top-left-radius: .3125rem;
+            border-top-right-radius: .3125rem;
             color: white;
             transition: all 0.3s ease-in-out;
             cursor: pointer;
@@ -64,15 +78,15 @@ class DataForm extends HTMLElement {
                     user-select: none;
           }
           .item.active {
-            padding-top: calc(1rem + 3px);
-            padding-bottom: calc(1rem + 3px);
-            top: -3px;
+            padding-top: calc(16px + .1875rem);
+            padding-bottom: calc(16px + .1875rem);
+            top: -0.1875rem;
             position: relative;
-            border: 1px solid rgba(0, 0, 0, 0.3);
+            border: .0625rem solid rgba(0, 0, 0, 0.3);
             border-bottom: none;
             background-color: white;
             color: #454545;
-            box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 -0.125rem .1875rem rgba(0, 0, 0, 0.2);
             z-index: 3;
           }
           .item:not(.active):hover {
@@ -80,16 +94,16 @@ class DataForm extends HTMLElement {
             transition: all 0.3s ease-in-out;
           }
           .item-content {
-            padding: 1rem;
-            border: 1px solid rgba(0, 0, 0, 0.3);
+            padding: 16px;
+            border: .0625rem solid rgba(0, 0, 0, 0.3);
             position: relative;
-            top: -4px;
-            box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
+            top: -0.25rem;
+            box-shadow: 0 -0.125rem .1875rem rgba(0, 0, 0, 0.2);
             display: none;
             background-color: white;
           }
           .item-content:first-child {
-            border-top-left-radius: 0px;
+            border-top-left-radius: 0rem;
           }
           .features-wrapper {
             background-color: red;
@@ -98,16 +112,16 @@ class DataForm extends HTMLElement {
             display: block;
           }
           .footer {
-            border: 1px solid rgba(0, 0, 0, 0.3);
+            border: .0625rem solid rgba(0, 0, 0, 0.3);
             border-top: none;
             display: flex;
             flex-direction: row-reverse;
             position: relative;
-            top: -4px;
+            top: -0.25rem;
           }
           button {
             border: none;
-            padding: 1rem;
+            padding: 16px;
             transition: all 0.3s ease-in-out;
           }
           button.save {
@@ -115,81 +129,88 @@ class DataForm extends HTMLElement {
             color: white;
           }
           button.save:hover {
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 .625rem rgba(0, 0, 0, 0.5);
           }
           button.save:active {
-            box-shadow: inset 0 0 30px rgb(0, 0, 0);
+            box-shadow: inset 0 0 1.875rem rgb(0, 0, 0);
           }
           button.reset:hover {
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 .625rem rgba(0, 0, 0, 0.5);
           }
           button.reset:active {
-            box-shadow: inset 0 0 30px rgb(0, 0, 0);
+            box-shadow: inset 0 0 1.875rem rgb(0, 0, 0);
           }
         .forms input, .forms textarea {
             width: 100%;
-            margin-bottom: 1rem;
-            border: 1px solid #63a022;
+            margin-bottom: 16px;
+            border: .0625rem solid #63a022;
             background-color: rgba(125, 202, 43, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
+            padding: 8px 16px;
+            border-radius: .3125rem;
             transition: all 0.6s ease-in-out;
           }
           .forms input:focus, .forms textarea:focus {
-            outline: 0px;
-            box-shadow: 0 0 10px #7dca2b;
+            outline: 0rem;
+            box-shadow: 0 0 .625rem #7dca2b;
             background-color: #ffffff;
           }
           .forms input.invalid, .forms textarea.invalid {
-            border: 1px solid #cc0000;
+            border: .0625rem solid #cc0000;
             background-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            box-shadow: 0 0 .625rem rgba(255, 0, 0, 0.5);
           }
           .forms input[type=radio], .forms input[type=checkbox] {
             width: auto;
           }
+          .forms input[type=color] {
+            padding: 30px;
+            border: 1px solid black;
+          }
+          .forms input[type=range] {
+            padding:8px 0;
+          }
           .forms textarea {
-            height: 15rem;
+            height: 240px;
           }
           .forms svg {
             fill: #7dca2b;
             vertical-align: middle;
-            margin-right: 1rem;
-            width: 2.5rem;
+            margin-right: 16px;
+            width: 40px;
           }
           .forms p {
-            font-size: 1.2rem;
+            font-size: 19.2px;
           }
           .forms .on-off {
             display: inline-block;
-            width: 50px;
-            height: 20px;
+            width: 3.125rem;
+            height: 1.25rem;
             background-color: #fff;
-            border-radius: 30px;
+            border-radius: 1.875rem;
             cursor: pointer;
             padding: 0;
-            margin-right: 1rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+            margin-right: 16px;
+            box-shadow: 0 0 .625rem rgba(0, 0, 0, 0.25);
           }
           .forms #toggle {
             display: none;
           }
           .forms .slider {
             display: block;
-            font-size: 10px;
+            font-size: .625rem;
             position: relative;
             color: white;
           }
           .forms .slider::after {
             content: "OFF";
-            width: 25px;
-            height: 25px;
+            width: 1.5625rem;
+            height: 1.5625rem;
             background-color: #900707;
-            border: 2px solid #fff;
+            border: .125rem solid #fff;
             border-radius: 50%;
-            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 .1875rem rgba(0, 0, 0, 0.3), 0 0 .625rem rgba(0, 0, 0, 0.5);
             position: absolute;
-            top: -5px;
+            top: -0.3125rem;
             left: 0;
             display: grid;
             place-content: center;
@@ -199,16 +220,16 @@ class DataForm extends HTMLElement {
           .forms #toggle:checked + .slider::after {
             content: "ON";
             background-color: #05ae3e;
-            transform: translateX(25px);
+            transform: translateX(1.5625rem);
           }
           .forms .error-message {
-            font-size: 0.6rem;
+            font-size: 9.6px;
             color: #ff0000;
             position: absolute;
-            bottom: 7px;
+            bottom: .4375rem;
             display: none;
             text-align: right;
-            right: 14px;
+            right: .875rem;
           }
           .forms .error {
             color: #ff0000;
@@ -266,94 +287,269 @@ class DataForm extends HTMLElement {
                 inputsGroup.classList.add("row");
                 tabContent.append(inputsGroup);
                 
-                Object.keys(row.formElements).forEach(item => {
+                for (let item in row.formElements){
                     
                     let formElement = row.formElements[item];
                     
                     switch (formElement.element) {
 
-                        case "input":
+                        // Si el input es hidden
+                        case "input":{
 
-                            if (formElement.type == "checkbox"){
+                            let input = document.createElement("input");
 
-                                if(formElement.options.length > 1) {
-
-                                    let fieldset = document.createElement("fieldset");
-                                    let legend = document.createElement("legend");
-                                    fieldset.append(legend)
-
-                                    legend.textContent = formElement.label;
-                                    fieldset.setAttribute("id", item);
-                                    inputsGroup.append(fieldset);
-
-                                    formElement.options.forEach( option => {
-
-                                        let input = document.createElement("input");
-                                        let label = document.createElement("label");
-
-                                        label.setAttribute("for", item);
-                                        label.append(input);
-                                        label.textContent = option.label;
-                                
-                                        input.setAttribute("id", option.label);
-                                        input.setAttribute("name", option.value);
-                                        input.setAttribute("type", formElement.type);
-
-                                        fieldset.append(input);
-                                        fieldset.append(label);
-                                        inputsGroup.append(fieldset);
-                                    });
+                            switch (formElement.type) {
+                                case "hidden": {
+                                    input.id = item;
+                                    input.name = item;
+                                    input.type = formElement.type;
+                                    form.append(input);
+                                    break;
                                 }
-                                
-                    
-                            } else if (formElement.type == "radio") {
 
-                            } else {
-                                // let label = document.createElement("label");
-                                // label.setAttribute("for", item);
-                                // label.textContent = formElement.label;
+                                case "checkbox":
+                                case "radio": {
+
+                                    if(formElement.options.length > 1) {
+
+                                        let fieldset = document.createElement("fieldset");
+                                        let legend = document.createElement("legend");
+                                        fieldset.append(legend);
+                                        
+                                        legend.textContent = formElement.label;
+                                        fieldset.setAttribute("id", item);
+                                        inputsGroup.append(fieldset);
+                                        
+                                        formElement.options.forEach( option => {
+
+                                            let inputWrapper = document.createElement("div");
+                                            let label = document.createElement("label");
+                                            let input = document.createElement("input");
+                                            
+                                            label.setAttribute("for", option.value);
+                                            label.textContent = option.label;
+                                            
+                                            input.setAttribute("id", option.value);
+                                            input.setAttribute("type", formElement.type);
+                                            if (formElement.type == "checkbox") {
+                                                input.setAttribute("name", option.value);
+                                            } else {
+                                                input.setAttribute("name", item);
+                                            }
+                                            input.setAttribute("value", option.value);
+                                            if (option.checked) {
+                                                input.setAttribute("checked", option.checked);
+                                            }
     
-                                // let input = document.createElement("input");
-                                // input.setAttribute("id",item);
-                                // input.setAttribute("name",item);
-                                // input.setAttribute("type",formElement.type);
-                                // inputsGroup.append(label);
-                                // inputsGroup.append(input);
+                                            inputWrapper.append(input);
+                                            inputWrapper.append(label);
+                                            fieldset.append(inputWrapper);
+                                        });
+                                    } else {
+                                        formElement.options.forEach( option => {
+                                            let inputWrapper = document.createElement("div");
+                                            let label = document.createElement("label");
+                                            let input = document.createElement("input");
+                                            label.setAttribute("for", option.value);
+                                            label.append(input);
+                                            label.textContent = option.label;
+                                            input.setAttribute("id", option.value);
+                                            input.setAttribute("name", option.value);
+                                            input.setAttribute("type", formElement.type);
+                                            input.setAttribute("value", option.value);
+                                            if (option.checked) {
+                                                input.setAttribute("checked", option.checked);
+                                            }
+                                            inputWrapper.append(input);
+                                            inputWrapper.append(label);
+                                            fieldset.append(inputWrapper);
+                                        });
+                                    }
+                                    break;
+                                }
 
-                            };
 
+                                case "range": {
+                                    let rangeContainer = document.createElement('div');
+                                    rangeContainer.classList.add('range-container');
 
-                            // if (formElement.options) {
-                            //     Object.values(formElement.options).forEach(option => {
-                            //         console.log(option.label);
-                            //     })
-                            // }
+                                    input.id = item;
+                                    input.name = item;
+                                    input.type = formElement.type;
+                                    input.min = formElement.min || '';
+                                    input.max = formElement.max || '';
+                                    input.step = formElement.step || '';
+                                    input.value = formElement.value || '';
+                                    rangeContainer.append(input);
+
+                                    const rangeValue = document.createElement('span');
+                                    rangeValue.classList.add('range-value');
+                                    rangeValue.innerText = formElement.value;
+                                    rangeContainer.append(rangeValue);
+
+                                    input.addEventListener('input', () => {
+                                        rangeValue.innerText = input.value;
+                                    });
+
+                                    inputsGroup.append(rangeContainer);
+
+                                    break;
+                                }
+                               
+                                case 'number':
+                                case 'date':
+                                case 'time':
+                                case 'datetime-local':
+                                case 'month':
+                                case 'week': {
+                                    let inputWrapper = document.createElement("div");
+                                    let label = document.createElement("label");
+                                    label.htmlFor = item;
+                                    label.textContent = formElement.label;
+                                    inputWrapper.append(label);
+                                    inputWrapper.append(input);
+                                  
+                                    input.id = item;
+                                    input.type = formElement.type;
+                                    input.name = item;
+                                    input.min = formElement.min || '';
+                                    input.max = formElement.max || '';
+                                    input.step = formElement.step || '';
+                                    input.placeholder = formElement.placeholder || '';
+                                    input.value = formElement.value || '';
+                                    input.readOnly = formElement.readOnly || false;
+                                    input.dataset.validate = formElement.validate || '';
+
+                                    inputsGroup.append(inputWrapper);
+                                
+                                    break;
+                                }
+
+                                case 'file': {
+
+                                    if(!this.shadow.querySelector('image-gallery-component')){
+                                        let imageGallery = document.createElement('image-gallery-component');
+                                        this.shadow.append(imageGallery);
+                                    }
+    
+                                    let input = document.createElement('upload-image-button-component');
+                                    input.id = item;
+                                    input.setAttribute("name", item);
+                                    input.setAttribute("languageAlias", "es");
+                                    input.setAttribute("quantity", formElement.quantity);
+    
+    
+                                    inputsGroup.append(input);
+    
+                                    break;
+                                }
+                            
+                                default: {
+                                    
+                                    let inputWrapper = document.createElement("div");
+                                    let label = document.createElement("label");
+                                    label.htmlFor = item;
+                                    label.textContent = formElement.label;
+                                    inputWrapper.append(label);
+                                    inputWrapper.append(input);
+                                    input.id = item;
+                                    input.type = formElement.type;
+                                    input.name = item;
+                                    input.value = formElement.value || '';
+                                    input.placeholder = formElement.placeholder || '';
+                                    input.dataset.validate = formElement.validate || '';
+                                  
+                                    if(formElement.maxLength){
+
+                                        // input.maxLength = formElement.maxLength || '';
+                                        // const counter = document.createElement('span');
+                                        // inputsGroup.append(counter);
+
+                                        input.addEventListener('input', () => {
+                                            if(input.value.length > 0){
+                                                counter.textContent = input.value.length + ' / ' + input.maxLength;                            
+                                            }else{
+                                                counter.textContent = '';
+                                            }
+                                        });
+                                    }
+            
+                                    inputsGroup.append(inputWrapper);
+                                }
+                            }
+                        
                             break;
+                        }
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        case "select":
+                        case "textarea": {
+                            let textareaWrapper = document.createElement("div");
+                            let label = document.createElement("label");
+                            let textarea = document.createElement('textarea');
+                            label.htmlFor = item;
+                            label.textContent = formElement.label;
+                            textareaWrapper.append(label);
+                            textareaWrapper.append(textarea);
+
+                            textarea.id = item;
+                            textarea.name = item;
+                            textarea.disabled = formElement.disabled || false;
+                            textarea.readOnly = formElement.readOnly || false;
+                            textarea.value = formElement.value || '';
+                            textarea.cols = formElement.cols || '';
+                            textarea.rows = formElement.rows || '';
+                            textarea.wrap = formElement.wrap || '';
+                            textarea.placeholder = formElement.placeholder || '';
+                            textarea.dataset.validate = formElement.validate || '';
+                           
+                            if(formElement.maxLength){
+    
+                                textarea.maxLength = formElement.maxLength || '';
+                                const counter = document.createElement('span');
+                                label.append(counter);
+    
+                                textarea.addEventListener('input', () => {
+                                    if(textarea.value.length > 0){
+                                        counter.textContent = textarea.value.length + ' / ' + textarea.maxLength;                            
+                                    }else{
+                                        counter.textContent = '';
+                                    }
+                                });
+                            }
+    
+                            inputsGroup.append(textareaWrapper);
+                            break;
+
+                        }
+
+
+                        case "select": {
+                            let selectWrapper = document.createElement("div");
+                            let label = document.createElement("label");
                             let select = document.createElement("select");
-                            // inputsGroup.append(select);
+                            label.htmlFor = item;
+                            label.textContent = formElement.label;
+                            selectWrapper.append(label);
+                            selectWrapper.append(select);
+                            select.id = item;
+                            select.name = item;
+                            select.disabled = formElement.disabled || false;
+                            select.required = formElement.required || false;
+                            select.multiple = formElement.multiple || false;
+            
+                            formElement.options.forEach(option => {
+                                const optionElement = document.createElement('option');
+                                optionElement.value = option.value;
+                                optionElement.innerText = option.label;
+                                select.append(optionElement);
+                            });
+            
+                            inputsGroup.append(selectWrapper);
+
                             break;
-                        case "textarea":
-                            let textarea = document.createElement("textarea");
-                            // inputsGroup.append(select);
-                            break;
-                        default:
-                            console.log("Hoy no es lunes, martes ni miércoles");
+                        }
+                        default: {
+                            console.log("Mierda");
+                        }
                     }
 
 
@@ -368,7 +564,7 @@ class DataForm extends HTMLElement {
 
 
 
-                });
+                };
 
             });
 
@@ -410,7 +606,7 @@ class DataForm extends HTMLElement {
                 console.log(itemActivo);
 
                 items.forEach(item => {
-                    item.classList.remove('active');
+                    item.classListNaNpxove('active');
                 });
 
                 item.classList.add('active');
@@ -419,7 +615,7 @@ class DataForm extends HTMLElement {
                     if (itemContent.dataset.content == itemActivo) {
                         itemContent.classList.add("active");
                     } else {
-                        itemContent.classList.remove("active");
+                        itemContent.classListNaNpxove("active");
                     };
                 });
             });
@@ -454,6 +650,7 @@ class DataForm extends HTMLElement {
                                         id:{
                                             element: 'input',
                                             type: 'hidden',
+                                            value: 'adsfasdf'
                                         },
                                         name: {
                                             label: 'Nombre',
@@ -532,8 +729,7 @@ class DataForm extends HTMLElement {
                                                 },
                                                 {
                                                     label: 'Femenino',
-                                                    value: "F"
-                                                }
+                                                    value: "F"                                                }
                                             ],
                                         }
                                     }
@@ -565,14 +761,14 @@ class DataForm extends HTMLElement {
                                 },
                                 row5: {
                                     formElements:{
-                                        edad: {
+                                        age: {
                                             label: 'Edad',
                                             element: 'input',
                                             type: 'number',
                                             placeholder: '',
                                             required: true
                                         },
-                                        telefono: {
+                                        telephone: {
                                             label: 'Teléfono',
                                             element: 'input',
                                             type: 'tel',
