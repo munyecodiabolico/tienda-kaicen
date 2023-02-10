@@ -291,11 +291,11 @@ class Sidebar extends HTMLElement {
   
             listButton.classList.add("list-button","list-button-click","d-flex","justify-content-sm-between");
 
-            link.textContent = menuItem.name
+            link.textContent = menuItem.name;
+            link.href = menuItem.customUrl;
             listItem.append(listButton);
             listButton.append(link);
             list.append(listItem);
-
 
             this.menuRecursivo(menuItem, listItem);
 
@@ -330,9 +330,13 @@ class Sidebar extends HTMLElement {
                     event.preventDefault();
                     listElement.classList.remove("arrow");
                     listElement.classList.remove("active");
+
                     if (listElement.classList.contains("list-button-click")) {
                         let menu = listElement.nextElementSibling;
-                        menu.style.height = "0";
+
+                        if(menu){
+                            menu.style.height = "0";
+                        }
                     }
                 });
 
@@ -345,24 +349,32 @@ class Sidebar extends HTMLElement {
                     listElement.classList.toggle("active");
                     let height = 0;
                     let menu = listElement.nextElementSibling;
-                    if (menu.clientHeight == "0") {
-                        height = menu.scrollHeight;
-                    } else {
-                        listElement.classList.toggle("arrow");
-                        listElement.classList.toggle("active");
-                    }
-                    menu.style.height = `${height}px`;
 
+                    if(menu){
+                        if (menu.clientHeight == "0") {
+                            height = menu.scrollHeight;
+                        } else {
+                            listElement.classList.toggle("arrow");
+                            listElement.classList.toggle("active");
+                        }
+                        menu.style.height = `${height}px`;
+                    }
+                    
                 } else {
 
                     listElement.classList.toggle("active");
+
                     var pageTitle = this.shadow.querySelector(".list-button.active .nav-link").innerHTML;
 
-                    document.dispatchEvent(new CustomEvent('newUrl', {
-                        detail: {
-                            title: pageTitle
-                        }
-                    }));
+                    if(link.getAttribute("href")){
+                        document.dispatchEvent(new CustomEvent('newUrl', {
+                            detail: {
+                                title: pageTitle,
+                                url: link.getAttribute("href")
+                            }
+                        }));
+                    }
+                   
                 }
             });
     
@@ -377,13 +389,14 @@ class Sidebar extends HTMLElement {
                 // });
 
                 // listElementSubmenu.classList.toggle("active");
-
-                document.dispatchEvent(new CustomEvent('newUrl', {
-                    detail: {
-                        title: link.textContent,
-                        url: link.getAttribute("href")
-                    }
-                }));
+                if(link.getAttribute("href")){
+                    document.dispatchEvent(new CustomEvent('newUrl', {
+                        detail: {
+                            title: link.textContent,
+                            url: link.getAttribute("href")
+                        }
+                    }));
+                }
             });
         });  
     }

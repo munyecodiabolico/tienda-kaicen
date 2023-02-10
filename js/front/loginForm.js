@@ -240,7 +240,7 @@ class LoginForm extends HTMLElement {
         </main>
         <div id="notification-wrapper" class="notification-wrapper">
             <div id="notification" class="notification">
-                <img src="img/sobre.png" alt="">
+                <img src="img/sobre.svg" alt="">
                 <p id="notification-message"></p>
             </div>
         </div>

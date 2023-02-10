@@ -5,17 +5,24 @@ class DataForm extends HTMLElement {
     constructor() {
         super();
         this.shadow = this.attachShadow({ mode: 'open' });
+        this.url = this.getAttribute("url");
     }
 
+    static get observedAttributes() { return ['url']; }
 
-    // Cuando
     connectedCallback() {
-        
-        this.render();
+
+        document.addEventListener("newUrl",( event =>{
+            this.setAttribute('url', event.detail.url);
+        }));
+
+        document.addEventListener('showElement', event => {
+            this.showElement(event.detail.id);
+        });
     }
 
     attributeChangedCallback(name, oldValue, newValue){
-
+        this.render();
     }
 
 	
@@ -37,11 +44,22 @@ class DataForm extends HTMLElement {
         .row > div,
         .row > fieldset {
             flex-grow:1;
+            width: 100%;
+        }
+        
+        .row > fieldset {
+            display:flex;
+            margin-bottom:1rem;
+            gap:2rem;
         }
 
-        .row > fieldset {
-            margin-bottom:1rem;
+        .row > fieldset > div input {
+            margin:0;
+            vertical-align:middle;
+            margin-right:5px;
         }
+
+
         .col-12 {
             flex: 0 0 auto;
             width: 100%;
@@ -101,6 +119,7 @@ class DataForm extends HTMLElement {
             box-shadow: 0 -0.125rem .1875rem rgba(0, 0, 0, 0.2);
             display: none;
             background-color: white;
+            width: 100%;
           }
           .item-content:first-child {
             border-top-left-radius: 0rem;
@@ -162,102 +181,124 @@ class DataForm extends HTMLElement {
           .forms input[type=radio], .forms input[type=checkbox] {
             width: auto;
           }
-          .forms input[type=color] {
-            padding: 30px;
-            border: 1px solid black;
-          }
           .forms input[type=range] {
-            padding:8px 0;
-          }
-          .forms textarea {
-            height: 240px;
-          }
-          .forms svg {
-            fill: #7dca2b;
-            vertical-align: middle;
-            margin-right: 16px;
-            width: 40px;
-          }
-          .forms p {
-            font-size: 19.2px;
+              padding:8px 0;
+            }
+            .forms textarea {
+                height: 240px;
+            }
+            .forms svg {
+                fill: #7dca2b;
+                vertical-align: middle;
+                margin-right: 16px;
+                width: 40px;
+            }
+            .forms p {
+                font-size: 19.2px;
           }
           .forms .on-off {
-            display: inline-block;
-            width: 3.125rem;
-            height: 1.25rem;
-            background-color: #fff;
-            border-radius: 1.875rem;
-            cursor: pointer;
-            padding: 0;
-            margin-right: 16px;
-            box-shadow: 0 0 .625rem rgba(0, 0, 0, 0.25);
-          }
-          .forms #toggle {
-            display: none;
-          }
-          .forms .slider {
-            display: block;
-            font-size: .625rem;
-            position: relative;
-            color: white;
-          }
-          .forms .slider::after {
-            content: "OFF";
-            width: 1.5625rem;
-            height: 1.5625rem;
-            background-color: #900707;
-            border: .125rem solid #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 .1875rem rgba(0, 0, 0, 0.3), 0 0 .625rem rgba(0, 0, 0, 0.5);
-            position: absolute;
-            top: -0.3125rem;
-            left: 0;
-            display: grid;
-            place-content: center;
-            line-height: 0;
-            transition: background-color 0.25s, transform 0.25s ease-in;
-          }
-          .forms #toggle:checked + .slider::after {
-            content: "ON";
-            background-color: #05ae3e;
-            transform: translateX(1.5625rem);
-          }
-          .forms .error-message {
-            font-size: 9.6px;
-            color: #ff0000;
-            position: absolute;
-            bottom: .4375rem;
-            display: none;
-            text-align: right;
-            right: .875rem;
+              display: inline-block;
+              width: 3.125rem;
+              height: 1.25rem;
+              background-color: #fff;
+              border-radius: 1.875rem;
+              cursor: pointer;
+              padding: 0;
+              margin-right: 16px;
+              box-shadow: 0 0 .625rem rgba(0, 0, 0, 0.25);
+            }
+            .forms #toggle {
+                display: none;
+            }
+            .forms .slider {
+                display: block;
+                font-size: .625rem;
+                position: relative;
+                color: white;
+            }
+            .forms .slider::after {
+                content: "OFF";
+                width: 1.5625rem;
+                height: 1.5625rem;
+                background-color: #900707;
+                border: .125rem solid #fff;
+                border-radius: 50%;
+                box-shadow: 0 0 .1875rem rgba(0, 0, 0, 0.3), 0 0 .625rem rgba(0, 0, 0, 0.5);
+                position: absolute;
+                top: -0.3125rem;
+                left: 0;
+                display: grid;
+                place-content: center;
+                line-height: 0;
+                transition: background-color 0.25s, transform 0.25s ease-in;
+            }
+            .forms #toggle:checked + .slider::after {
+                content: "ON";
+                background-color: #05ae3e;
+                transform: translateX(1.5625rem);
+            }
+            .forms .error-message {
+                font-size: 9.6px;
+                color: #ff0000;
+                position: absolute;
+                bottom: .4375rem;
+                display: none;
+                text-align: right;
+                right: .875rem;
           }
           .forms .error {
-            color: #ff0000;
-          }
+              color: #ff0000;
+            }
+            .forms .rangeLine {
+                display:flex;
+                align-items:center;
+            }
+            input[type="range"] {
+                margin:0;
+            }
+            input[type="color"] {
+                width:40px;
+                height:40px;
+                display:block;
+                padding:2px 4px;
+            }
+            select {
+                display:block;
+                padding:10px;
+                width:200px;
+            }
 
-        </style>
-        <div class="content-item-list row product-features-tabs">
-			<div>
-                <form action="http://127.0.0.1:8080/api/admin/users" class="forms admin-form">
-                    <div class="barra-opciones" >
-                        <div class="tabs-wrapper">
-                            
-                        </div>
-                        
-                        <div class="options">
+            input {
+                accent-color:red;
+            }
+
+            
+            </style>
+            <div class="content-item-list row product-features-tabs">
+                <div>
+                    <form action="http://127.0.0.1:8080/api/admin/users" class="forms admin-form">
+                        <div class="barra-opciones" >
+                            <div class="tabs-wrapper">
+                    
+                            </div>
+                    
+                            <div class="options">
                                 <label class="on-off" for="toggle">
                                     <input id="toggle" type="checkbox">
                                     <span class="slider"></span>
-                                </label>
+                                </label>    
                             </div>
                         </div>
                         <div class="data-tabs-content">
-                        
+                    
                         </div>
-                    </div>
-                </form>
+                        <div class="footer">
+                            <button id="submitForm" class="save">GUARDAR</button>
+                            <button class="reset">RESET</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
 
         `;
 
@@ -270,13 +311,14 @@ class DataForm extends HTMLElement {
             
             let item = document.createElement("div");
             item.classList.add("item","tabs");
-            item.setAttribute("data-content", key);
+            item.dataset.content = key;
             item.textContent = `${formStructure.tabs[key].label}`;
             form.append(item);
 
             // Creando contenedor del contenido de un tab
             let tabContent = document.createElement("div");
             tabContent.classList.add("item-content");
+            tabContent.dataset.content = key
             itemContents.append(tabContent);
 
             //Creando un tabContent 
@@ -372,7 +414,11 @@ class DataForm extends HTMLElement {
                                 case "range": {
                                     let rangeContainer = document.createElement('div');
                                     rangeContainer.classList.add('range-container');
-
+                                    let label = document.createElement("label");
+                                    label.htmlFor = item;
+                                    label.textContent = formElement.label;
+                                    
+                                    
                                     input.id = item;
                                     input.name = item;
                                     input.type = formElement.type;
@@ -380,17 +426,23 @@ class DataForm extends HTMLElement {
                                     input.max = formElement.max || '';
                                     input.step = formElement.step || '';
                                     input.value = formElement.value || '';
-                                    rangeContainer.append(input);
-
-                                    const rangeValue = document.createElement('span');
+                                    
+                                    
+                                    let rangeValue = document.createElement('span');
                                     rangeValue.classList.add('range-value');
                                     rangeValue.innerText = formElement.value;
-                                    rangeContainer.append(rangeValue);
-
+                                    
+                                    let rangeLineWrapper = document.createElement("div");
+                                    rangeLineWrapper.classList.add("rangeLine");
+                                    
                                     input.addEventListener('input', () => {
                                         rangeValue.innerText = input.value;
                                     });
-
+                                    
+                                    rangeContainer.append(label);
+                                    rangeLineWrapper.append(input);
+                                    rangeLineWrapper.append(rangeValue);
+                                    rangeContainer.append(rangeLineWrapper);
                                     inputsGroup.append(rangeContainer);
 
                                     break;
@@ -551,24 +603,8 @@ class DataForm extends HTMLElement {
                             console.log("Mierda");
                         }
                     }
-
-
-
-
-
-
-
-
-
-
-
-
-
                 };
-
             });
-
-
         });
 
         this.shadow.querySelector('.tabs').classList.add("active");
@@ -589,6 +625,7 @@ class DataForm extends HTMLElement {
         // });
 
         this.renderTabs();
+        this.renderButtons();
 
     }
 
@@ -596,30 +633,132 @@ class DataForm extends HTMLElement {
     renderTabs = () => {
 
         let items = this.shadow.querySelectorAll(".tabs");
-        let itemContents = this.shadow.querySelectorAll(".cont-tabs");
+        let itemContents = this.shadow.querySelectorAll(".item-content");
     
         items.forEach(item => {
 
             item.addEventListener("click", () => {
 
                 let itemActivo = item.dataset.content;
-                console.log(itemActivo);
 
                 items.forEach(item => {
-                    item.classListNaNpxove('active');
+                    item.classList.remove('active');
                 });
 
                 item.classList.add('active');
 
                 itemContents.forEach(itemContent => {
+
                     if (itemContent.dataset.content == itemActivo) {
                         itemContent.classList.add("active");
                     } else {
-                        itemContent.classListNaNpxove("active");
+                        itemContent.classList.remove("active");
                     };
                 });
             });
         });
+    }
+
+
+    renderButtons(){
+        
+        let submitForm = this.shadow.querySelector('#submitForm');
+
+        submitForm.addEventListener('click', async event => {
+    
+            event.preventDefault();
+
+            let form = this.shadow.querySelector('.admin-form');
+            let url = API_URL + this.getAttribute('url');
+            let formData = new FormData(form);
+            let formDataJson = Object.fromEntries(formData.entries());
+
+            try{
+                
+                let response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+                    },
+                    body: JSON.stringify(formDataJson)
+                })
+
+                switch(response.status){
+
+                    case 200:
+
+                        this.render();
+
+                        document.dispatchEvent(new CustomEvent('newData'));
+
+                        document.dispatchEvent(new CustomEvent('message', {
+                            detail: {
+                                text: 'Formulario enviado correctamente',
+                                type: 'success'
+                            }
+                        }));
+
+                        break;
+
+                    case 401:
+
+                        document.dispatchEvent(new CustomEvent('message', {
+                            detail: {
+                                text: 'No tienes autorización',
+                                type: 'error'
+                            }
+                        }));
+
+                        break;
+
+
+                    case 500:
+
+                        document.dispatchEvent(new CustomEvent('message', {
+                            detail: {
+                                text: 'Fallo al enviar el formulario',
+                                type: 'error'
+                            }
+                        }));
+
+                        break;
+                }
+
+            }catch(error){
+
+                console.log(error)
+                
+                document.dispatchEvent(new CustomEvent('message', {
+                    detail: {
+                        text: 'Fallo al enviar el formulario',
+                        type: 'error'
+                    }
+                }));
+            }
+        });
+    }
+
+    async showElement(id){
+
+        let url = `${API_URL}${this.getAttribute('url')}/${id}`;
+        
+        let response = await fetch(url, {
+            headers: {
+                "Authorization": "Bearer " + sessionStorage.getItem("accessToken"),
+            }
+        });
+        
+        let data = await response.json();
+
+
+        for (const [key, value] of Object.entries(data)) {
+            
+            if (this.shadow.querySelector(`[id="${key}"]`)) {
+                this.shadow.querySelector(`[id="${key}"]`).value = value;
+            }
+        }
+       
     }
     
     setFormStructure = async () => {
@@ -629,6 +768,62 @@ class DataForm extends HTMLElement {
         switch (url) {
 
             case '/api/admin/users':
+
+                return {
+
+                    tabs:{
+                        main: {
+                            label: 'Principal',
+                        }
+                    },
+
+                    tabsContent: {
+                       
+                        main: {
+                            rows:{
+                                row1: {
+                                    formElements:{
+                                        name: {
+                                            label: 'Nombre',
+                                            element: 'input',
+                                            type: 'text',
+                                            placeholder: '',
+                                            required: true,
+                                        },
+                                        email: {
+                                            label: 'Email',
+                                            element: 'input',
+                                            type: 'email',
+                                            placeholder: '',
+                                            required: true,
+                                            validate: 'email'
+                                        }
+                                    }
+                                },
+                                row2: {
+                                    formElements:{
+                                        password: {
+                                            label: 'Contraseña',
+                                            element: 'input',
+                                            type: 'password',
+                                            placeholder: '',
+                                            required: true
+                                        },
+                                        repeatPassword: {
+                                            label: 'Repita la contraseña',
+                                            element: 'input',
+                                            type: 'password',
+                                            placeholder: '',
+                                            required: true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            case '/api/admin/ejemplo':
 
                 return {
 
@@ -729,7 +924,8 @@ class DataForm extends HTMLElement {
                                                 },
                                                 {
                                                     label: 'Femenino',
-                                                    value: "F"                                                }
+                                                    value: "F"
+                                                }
                                             ],
                                         }
                                     }

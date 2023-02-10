@@ -4,7 +4,7 @@ class Notification extends HTMLElement {
 		this.shadow = this.attachShadow({ mode: 'open' });
 	}
 
-	static get observedAttributes() { return ['text', 'type'];}
+	static get observedAttributes() { return ['type'];}
 
 	connectedCallback() {
 
@@ -30,16 +30,11 @@ class Notification extends HTMLElement {
 		setTimeout(() => {
 			notificationWrapper.classList.remove("active");
 			notification.classList.remove("active");
-			this.removeAttribute('type');
 		}, 5000);
 	
-		if (this.name === 'text') {
-			this.shadow.querySelector('#notification-message').innerHTML = newValue;
-		} else if (this.name === 'type') {
-			let notification = this.shadow.querySelector('#notification');
-			notification.classList.remove(oldValue);
-			notification.classList.add(newValue);
-		}
+		this.shadow.querySelector('#notification-message').innerHTML = this.getAttribute("text");
+		notification.classList.remove(oldValue);
+		notification.classList.add(newValue);
 	}
 
 
@@ -101,7 +96,7 @@ class Notification extends HTMLElement {
 		</style>
 		<div id="notification-wrapper" class="notification-wrapper">
 			<div id="notification" class="notification">
-				<img src="img/sobre.png" alt="">
+				<img src="../img/sobre.svg" alt="">
 				<p id="notification-message"></p>
 			</div>
 		</div>
