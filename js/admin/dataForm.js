@@ -1,4 +1,4 @@
-import {API_URL} from "../../config/config.js";
+import { API_URL } from "../../config/config.js";
 
 class DataForm extends HTMLElement {
 
@@ -12,24 +12,25 @@ class DataForm extends HTMLElement {
 
     connectedCallback() {
 
-        document.addEventListener("newUrl",( event =>{
+        document.addEventListener("newUrl", (event => {
             this.setAttribute('url', event.detail.url);
         }));
 
         document.addEventListener('showElement', event => {
             this.showElement(event.detail.id);
         });
+
     }
 
-    attributeChangedCallback(name, oldValue, newValue){
+    attributeChangedCallback(name, oldValue, newValue) {
         this.render();
     }
 
-	
+
     async render() {
 
-        this.shadow.innerHTML = 
-        `
+        this.shadow.innerHTML =
+            `
         <style>
         * {
             box-sizing:border-box;
@@ -303,14 +304,14 @@ class DataForm extends HTMLElement {
         `;
 
         let form = this.shadow.querySelector(".tabs-wrapper");
-        let formStructure =  await this.setFormStructure();
+        let formStructure = await this.setFormStructure();
 
-        Object.keys(formStructure.tabs).forEach(key =>{
-            
+        Object.keys(formStructure.tabs).forEach(key => {
+
             let itemContents = this.shadow.querySelector(".data-tabs-content");
-            
+
             let item = document.createElement("div");
-            item.classList.add("item","tabs");
+            item.classList.add("item", "tabs");
             item.dataset.content = key;
             item.textContent = `${formStructure.tabs[key].label}`;
             form.append(item);
@@ -328,15 +329,15 @@ class DataForm extends HTMLElement {
                 let inputsGroup = document.createElement("div");
                 inputsGroup.classList.add("row");
                 tabContent.append(inputsGroup);
-                
-                for (let item in row.formElements){
-                    
+
+                for (let item in row.formElements) {
+
                     let formElement = row.formElements[item];
-                    
+
                     switch (formElement.element) {
 
                         // Si el input es hidden
-                        case "input":{
+                        case "input": {
 
                             let input = document.createElement("input");
 
@@ -352,25 +353,25 @@ class DataForm extends HTMLElement {
                                 case "checkbox":
                                 case "radio": {
 
-                                    if(formElement.options.length > 1) {
+                                    if (formElement.options.length > 1) {
 
                                         let fieldset = document.createElement("fieldset");
                                         let legend = document.createElement("legend");
                                         fieldset.append(legend);
-                                        
+
                                         legend.textContent = formElement.label;
                                         fieldset.setAttribute("id", item);
                                         inputsGroup.append(fieldset);
-                                        
-                                        formElement.options.forEach( option => {
+
+                                        formElement.options.forEach(option => {
 
                                             let inputWrapper = document.createElement("div");
                                             let label = document.createElement("label");
                                             let input = document.createElement("input");
-                                            
+
                                             label.setAttribute("for", option.value);
                                             label.textContent = option.label;
-                                            
+
                                             input.setAttribute("id", option.value);
                                             input.setAttribute("type", formElement.type);
                                             if (formElement.type == "checkbox") {
@@ -382,13 +383,13 @@ class DataForm extends HTMLElement {
                                             if (option.checked) {
                                                 input.setAttribute("checked", option.checked);
                                             }
-    
+
                                             inputWrapper.append(input);
                                             inputWrapper.append(label);
                                             fieldset.append(inputWrapper);
                                         });
                                     } else {
-                                        formElement.options.forEach( option => {
+                                        formElement.options.forEach(option => {
                                             let inputWrapper = document.createElement("div");
                                             let label = document.createElement("label");
                                             let input = document.createElement("input");
@@ -417,8 +418,8 @@ class DataForm extends HTMLElement {
                                     let label = document.createElement("label");
                                     label.htmlFor = item;
                                     label.textContent = formElement.label;
-                                    
-                                    
+
+
                                     input.id = item;
                                     input.name = item;
                                     input.type = formElement.type;
@@ -426,19 +427,19 @@ class DataForm extends HTMLElement {
                                     input.max = formElement.max || '';
                                     input.step = formElement.step || '';
                                     input.value = formElement.value || '';
-                                    
-                                    
+
+
                                     let rangeValue = document.createElement('span');
                                     rangeValue.classList.add('range-value');
                                     rangeValue.innerText = formElement.value;
-                                    
+
                                     let rangeLineWrapper = document.createElement("div");
                                     rangeLineWrapper.classList.add("rangeLine");
-                                    
+
                                     input.addEventListener('input', () => {
                                         rangeValue.innerText = input.value;
                                     });
-                                    
+
                                     rangeContainer.append(label);
                                     rangeLineWrapper.append(input);
                                     rangeLineWrapper.append(rangeValue);
@@ -447,7 +448,7 @@ class DataForm extends HTMLElement {
 
                                     break;
                                 }
-                               
+
                                 case 'number':
                                 case 'date':
                                 case 'time':
@@ -460,7 +461,7 @@ class DataForm extends HTMLElement {
                                     label.textContent = formElement.label;
                                     inputWrapper.append(label);
                                     inputWrapper.append(input);
-                                  
+
                                     input.id = item;
                                     input.type = formElement.type;
                                     input.name = item;
@@ -473,31 +474,31 @@ class DataForm extends HTMLElement {
                                     input.dataset.validate = formElement.validate || '';
 
                                     inputsGroup.append(inputWrapper);
-                                
+
                                     break;
                                 }
 
                                 case 'file': {
 
-                                    if(!this.shadow.querySelector('image-gallery-component')){
+                                    if (!this.shadow.querySelector('image-gallery-component')) {
                                         let imageGallery = document.createElement('image-gallery-component');
                                         this.shadow.append(imageGallery);
                                     }
-    
+
                                     let input = document.createElement('upload-image-button-component');
                                     input.id = item;
                                     input.setAttribute("name", item);
                                     input.setAttribute("languageAlias", "es");
                                     input.setAttribute("quantity", formElement.quantity);
-    
-    
+
+
                                     inputsGroup.append(input);
-    
+
                                     break;
                                 }
-                            
+
                                 default: {
-                                    
+
                                     let inputWrapper = document.createElement("div");
                                     let label = document.createElement("label");
                                     label.htmlFor = item;
@@ -510,29 +511,29 @@ class DataForm extends HTMLElement {
                                     input.value = formElement.value || '';
                                     input.placeholder = formElement.placeholder || '';
                                     input.dataset.validate = formElement.validate || '';
-                                  
-                                    if(formElement.maxLength){
+
+                                    if (formElement.maxLength) {
 
                                         // input.maxLength = formElement.maxLength || '';
                                         // const counter = document.createElement('span');
                                         // inputsGroup.append(counter);
 
                                         input.addEventListener('input', () => {
-                                            if(input.value.length > 0){
-                                                counter.textContent = input.value.length + ' / ' + input.maxLength;                            
-                                            }else{
+                                            if (input.value.length > 0) {
+                                                counter.textContent = input.value.length + ' / ' + input.maxLength;
+                                            } else {
                                                 counter.textContent = '';
                                             }
                                         });
                                     }
-            
+
                                     inputsGroup.append(inputWrapper);
                                 }
                             }
-                        
+
                             break;
                         }
-                        
+
                         case "textarea": {
                             let textareaWrapper = document.createElement("div");
                             let label = document.createElement("label");
@@ -552,22 +553,22 @@ class DataForm extends HTMLElement {
                             textarea.wrap = formElement.wrap || '';
                             textarea.placeholder = formElement.placeholder || '';
                             textarea.dataset.validate = formElement.validate || '';
-                           
-                            if(formElement.maxLength){
-    
+
+                            if (formElement.maxLength) {
+
                                 textarea.maxLength = formElement.maxLength || '';
                                 const counter = document.createElement('span');
                                 label.append(counter);
-    
+
                                 textarea.addEventListener('input', () => {
-                                    if(textarea.value.length > 0){
-                                        counter.textContent = textarea.value.length + ' / ' + textarea.maxLength;                            
-                                    }else{
+                                    if (textarea.value.length > 0) {
+                                        counter.textContent = textarea.value.length + ' / ' + textarea.maxLength;
+                                    } else {
                                         counter.textContent = '';
                                     }
                                 });
                             }
-    
+
                             inputsGroup.append(textareaWrapper);
                             break;
 
@@ -587,14 +588,14 @@ class DataForm extends HTMLElement {
                             select.disabled = formElement.disabled || false;
                             select.required = formElement.required || false;
                             select.multiple = formElement.multiple || false;
-            
+
                             formElement.options.forEach(option => {
                                 const optionElement = document.createElement('option');
                                 optionElement.value = option.value;
                                 optionElement.innerText = option.label;
                                 select.append(optionElement);
                             });
-            
+
                             inputsGroup.append(selectWrapper);
 
                             break;
@@ -617,7 +618,7 @@ class DataForm extends HTMLElement {
         //     itemContent.setAttribute("data-content", key);
         //     let inputsWrapper = document.createElement("div");
         //     inputsWrapper.classList.add("inputsWrapper");
-            
+
 
         //     itemContent.append(inputsWrapper);
 
@@ -634,7 +635,7 @@ class DataForm extends HTMLElement {
 
         let items = this.shadow.querySelectorAll(".tabs");
         let itemContents = this.shadow.querySelectorAll(".item-content");
-    
+
         items.forEach(item => {
 
             item.addEventListener("click", () => {
@@ -660,12 +661,12 @@ class DataForm extends HTMLElement {
     }
 
 
-    renderButtons(){
-        
+    renderButtons() {
+
         let submitForm = this.shadow.querySelector('#submitForm');
 
         submitForm.addEventListener('click', async event => {
-    
+
             event.preventDefault();
 
             let form = this.shadow.querySelector('.admin-form');
@@ -673,8 +674,8 @@ class DataForm extends HTMLElement {
             let formData = new FormData(form);
             let formDataJson = Object.fromEntries(formData.entries());
 
-            try{
-                
+            try {
+
                 let response = await fetch(url, {
                     method: 'POST',
                     headers: {
@@ -684,13 +685,13 @@ class DataForm extends HTMLElement {
                     body: JSON.stringify(formDataJson)
                 })
 
-                switch(response.status){
+                switch (response.status) {
 
                     case 200:
 
                         this.render();
 
-                        document.dispatchEvent(new CustomEvent('newData'));
+                        document.dispatchEvent(new CustomEvent('refreshTable'));
 
                         document.dispatchEvent(new CustomEvent('message', {
                             detail: {
@@ -725,10 +726,10 @@ class DataForm extends HTMLElement {
                         break;
                 }
 
-            }catch(error){
+            } catch (error) {
 
                 console.log(error)
-                
+
                 document.dispatchEvent(new CustomEvent('message', {
                     detail: {
                         text: 'Fallo al enviar el formulario',
@@ -739,50 +740,51 @@ class DataForm extends HTMLElement {
         });
     }
 
-    async showElement(id){
+    async showElement(id) {
 
         let url = `${API_URL}${this.getAttribute('url')}/${id}`;
-        
+
         let response = await fetch(url, {
             headers: {
                 "Authorization": "Bearer " + sessionStorage.getItem("accessToken"),
             }
         });
-        
+
         let data = await response.json();
 
 
         for (const [key, value] of Object.entries(data)) {
-            
+
             if (this.shadow.querySelector(`[id="${key}"]`)) {
                 this.shadow.querySelector(`[id="${key}"]`).value = value;
             }
         }
-       
+
     }
-    
+
     setFormStructure = async () => {
-       
+
         let url = this.getAttribute('url');
 
         switch (url) {
 
+            // Formulario de usuarios
             case '/api/admin/users':
 
                 return {
 
-                    tabs:{
+                    tabs: {
                         main: {
                             label: 'Principal',
                         }
                     },
 
                     tabsContent: {
-                       
+
                         main: {
-                            rows:{
+                            rows: {
                                 row1: {
-                                    formElements:{
+                                    formElements: {
                                         name: {
                                             label: 'Nombre',
                                             element: 'input',
@@ -801,7 +803,78 @@ class DataForm extends HTMLElement {
                                     }
                                 },
                                 row2: {
-                                    formElements:{
+                                    formElements: {
+                                        password: {
+                                            label: 'Contraseña',
+                                            element: 'input',
+                                            type: 'password',
+                                            placeholder: '',
+                                            required: true
+                                        },
+                                        repeatPassword: {
+                                            label: 'Repita la contraseña',
+                                            element: 'input',
+                                            type: 'password',
+                                            placeholder: '',
+                                            required: true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+            case '/api/admin/businesses':
+
+                return {
+
+                    tabs: {
+                        main: {
+                            label: 'Principal',
+                        }
+                    },
+
+                    tabsContent: {
+
+                        main: {
+                            rows: {
+                                row1: {
+                                    formElements: {
+                                        company: {
+                                            label: 'Compañía',
+                                            element: 'input',
+                                            type: 'text',
+                                            placeholder: '',
+                                            required: true,
+                                        }
+                                    }
+                                },
+                                row2: {
+                                    formElements: {
+                                        street: {
+                                            label: 'Dirección',
+                                            element: 'input',
+                                            type: 'text',
+                                            placeholder: '',
+                                            required: true,
+                                            validate: 'email'
+                                        },
+                                        postalCode: {
+                                            label: 'C.P.',
+                                            element: 'input',
+                                            type: 'text',
+                                            placeholder: '',
+                                            required: true,
+                                            validate: 'email'
+                                        },
+
+
+                                    }
+                                },
+                                row2: {
+                                    formElements: {
                                         password: {
                                             label: 'Contraseña',
                                             element: 'input',
@@ -827,7 +900,7 @@ class DataForm extends HTMLElement {
 
                 return {
 
-                    tabs:{
+                    tabs: {
                         main: {
                             label: 'Principal',
                         },
@@ -837,12 +910,12 @@ class DataForm extends HTMLElement {
                     },
 
                     tabsContent: {
-                       
+
                         main: {
-                            rows:{
+                            rows: {
                                 row1: {
-                                    formElements:{
-                                        id:{
+                                    formElements: {
+                                        id: {
                                             element: 'input',
                                             type: 'hidden',
                                             value: 'adsfasdf'
@@ -867,7 +940,7 @@ class DataForm extends HTMLElement {
                                     }
                                 },
                                 row2: {
-                                    formElements:{
+                                    formElements: {
                                         password: {
                                             label: 'Contraseña',
                                             element: 'input',
@@ -885,7 +958,7 @@ class DataForm extends HTMLElement {
                                     }
                                 },
                                 row3: {
-                                    formElements:{
+                                    formElements: {
                                         permissions: {
                                             label: 'Permisos',
                                             element: 'input',
@@ -931,7 +1004,7 @@ class DataForm extends HTMLElement {
                                     }
                                 },
                                 row4: {
-                                    formElements:{
+                                    formElements: {
                                         color: {
                                             label: 'Color',
                                             element: 'input',
@@ -956,7 +1029,7 @@ class DataForm extends HTMLElement {
                                     }
                                 },
                                 row5: {
-                                    formElements:{
+                                    formElements: {
                                         age: {
                                             label: 'Edad',
                                             element: 'input',
@@ -981,7 +1054,7 @@ class DataForm extends HTMLElement {
                                     }
                                 },
                                 row6: {
-                                    formElements:{
+                                    formElements: {
                                         creationDate: {
                                             label: 'Fecha de creación',
                                             element: 'input',
@@ -1000,7 +1073,7 @@ class DataForm extends HTMLElement {
                                     }
                                 },
                                 row7: {
-                                    formElements:{
+                                    formElements: {
                                         reservationWeek: {
                                             label: 'Semana de reserva',
                                             element: 'input',
@@ -1025,7 +1098,7 @@ class DataForm extends HTMLElement {
                                     }
                                 },
                                 row8: {
-                                    formElements:{
+                                    formElements: {
                                         capital: {
                                             label: 'Capital',
                                             element: 'input',
@@ -1037,10 +1110,10 @@ class DataForm extends HTMLElement {
                                             placeholder: ''
                                         },
                                     }
-                                   
+
                                 },
                                 row9: {
-                                    formElements:{
+                                    formElements: {
                                         pdf: {
                                             label: 'Pdf',
                                             element: 'input',
@@ -1058,7 +1131,7 @@ class DataForm extends HTMLElement {
                                     }
                                 },
                                 row10: {
-                                    formElements:{
+                                    formElements: {
                                         description: {
                                             label: 'Descripción',
                                             element: 'textarea',
@@ -1071,10 +1144,10 @@ class DataForm extends HTMLElement {
                             }
                         },
                         secundario: {
-                            rows:{
+                            rows: {
                                 row1: {
-                                    formElements:{
-                                        idSecund:{
+                                    formElements: {
+                                        idSecund: {
                                             element: 'input',
                                             type: 'hidden',
                                         },
@@ -1101,8 +1174,8 @@ class DataForm extends HTMLElement {
                         }
                     }
                 }
-            }
-        };
+        }
+    };
 }
 
 

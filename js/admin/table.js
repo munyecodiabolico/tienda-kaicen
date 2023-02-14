@@ -6,6 +6,9 @@ class Table extends HTMLElement {
         super();
         this.shadow = this.attachShadow({ mode: 'open' });
         this.dataTable = [];
+        this.total = null;
+        this.pages = null;
+        this.currentPage = null;
     }
 
     static get observedAttributes() { return ['url']; }
@@ -17,7 +20,7 @@ class Table extends HTMLElement {
             this.setAttribute('url', event.detail.url);
         }));
         
-        document.addEventListener("newData",( event =>{
+        document.addEventListener("refreshTable",( event =>{
             this.loadData().then(() => this.render());
         }));
     
@@ -29,9 +32,9 @@ class Table extends HTMLElement {
         }
     }
 
-    async loadData(){
+    async loadData(pagination){
 
-        let url = `${API_URL}${this.getAttribute('url')}`;
+        let url = pagination ? `${API_URL}${this.getAttribute('url')}?page=${pagination}` :  `${API_URL}${this.getAttribute('url')}` ;
 
         let response = await fetch(url, {
             headers: {
@@ -40,6 +43,10 @@ class Table extends HTMLElement {
         });
         
         let data = await response.json();
+        console.log(url);
+        this.currentPage = data.meta.currentPage;
+        this.total = data.meta.total;
+        this.pages = data.meta.pages;
         this.dataTable = data.rows;
     }
 
@@ -117,10 +124,62 @@ class Table extends HTMLElement {
         svg:hover {
             fill:#7fb820;
         }
+
+        .table-pagination {
+            margin-top: 1em;
+        }
+       
+        .table-pagination .table-pagination-info{
+            color: #000;
+            display: flex;
+            font-family: 'Roboto', sans-serif;
+            justify-content: space-between;
+        }
+
+        .table-pagination .table-pagination-buttons p{
+            color: #000;
+            font-family: 'Roboto', sans-serif;
+            margin: 1rem 0;
+        }
+
+        .table-pagination-info p{
+            margin: 0;
+        }
+   
+        .table-pagination .table-pagination-button{
+            cursor: pointer;
+            margin-right: 1em;
+            background-color: #dbdada;
+            padding:5px;
+            border-radius:3px;
+        }
+   
+        .table-pagination .table-pagination-button:hover{
+            color: hsl(19, 100%, 50%);
+        }
+   
+        .table-pagination .table-pagination-button.inactive{
+            color: hsl(0, 0%, 69%);
+        }
+
         </style>
         <ul class="items-list">
 
         </ul>
+        <div class="table-pagination">
+            <div class="table-pagination-info">
+                <div class="table-pagination-total"><p><span id="total-page">${this.total}</span> registros</p></div>
+                <div class="table-pagination-pages"><p>Página <span id="current-page">${this.currentPage}</span> de <span id="last-page">${this.pages}</span></p></div>
+            </div>
+            <div class="table-pagination-buttons">
+                <p>
+                    <span class="table-pagination-button" id="firstPageUrl">Primera</span>
+                    <span class="table-pagination-button" id="previousPageUrl">Anterior</span>
+                    <span class="table-pagination-button" id="nextPageUrl">Siguiente</span>
+                    <span class="table-pagination-button" id="lastPageUrl">Última</span>
+                </p>
+            </div>
+        </div>
         `;
 
         let itemsList = this.shadow.querySelector(".items-list");
@@ -160,7 +219,35 @@ class Table extends HTMLElement {
         });  
         
         this.renderActions();
+        this.renderPaginationButtons();
 
+    }
+
+    renderPaginationButtons(){
+        let firstPage = this.shadow.querySelector("#firstPageUrl");
+        let previousPage = this.shadow.querySelector("#previousPageUrl");
+        let nextPage = this.shadow.querySelector("#nextPageUrl");
+        let lastPage = this.shadow.querySelector("#lastPageUrl");
+
+        firstPage.addEventListener('click', async event => {
+            this.loadData(1).then(() => this.render());
+        });
+
+        previousPage.addEventListener('click', async event => {
+            if (this.currentPage > 1) {
+                this.loadData(parseInt(this.currentPage) - 1).then(() => this.render());
+            }
+        });
+
+        nextPage.addEventListener('click', async event => {
+            if (this.currentPage < this.pages) {
+                this.loadData(parseInt(this.currentPage) + 1).then(() => this.render());
+            }
+        });
+
+        lastPage.addEventListener('click', async event => {
+            this.loadData(this.pages).then(() => this.render());
+        });
     }
 
     renderActions(){
@@ -174,6 +261,21 @@ class Table extends HTMLElement {
                 document.dispatchEvent(new CustomEvent('showElement', {
                     detail: {
                         id: editButton.dataset.id
+                    }
+                }));
+
+            });
+        });
+
+        let deleteButtons = this.shadow.querySelectorAll('.trash');
+
+        deleteButtons.forEach(deleteButton => {
+
+            deleteButton.addEventListener('click', async event => {
+
+                document.dispatchEvent(new CustomEvent('deleteElement', {
+                    detail: {
+                        id: deleteButton.dataset.id
                     }
                 }));
 
