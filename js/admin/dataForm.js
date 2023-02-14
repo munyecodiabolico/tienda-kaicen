@@ -272,7 +272,11 @@ class DataForm extends HTMLElement {
             input {
                 accent-color:red;
             }
-
+            input.invalid, textarea.invalid {
+                border: 1px solid #cc0000;
+                background-color: rgba(255, 255, 255, 0.2);
+                box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+              }
             
             </style>
             <div class="content-item-list row product-features-tabs">
@@ -571,7 +575,6 @@ class DataForm extends HTMLElement {
 
                             inputsGroup.append(textareaWrapper);
                             break;
-
                         }
 
 
@@ -670,6 +673,11 @@ class DataForm extends HTMLElement {
             event.preventDefault();
 
             let form = this.shadow.querySelector('.admin-form');
+
+            if(!this.validateForm(form.elements)){
+                return;
+            };
+
             let url = API_URL + this.getAttribute('url');
             let formData = new FormData(form);
             let formDataJson = Object.fromEntries(formData.entries());
@@ -740,6 +748,41 @@ class DataForm extends HTMLElement {
         });
     }
 
+
+    validateForm(inputs) {
+        let validForm = true;
+        let regExpresions = {
+            'email': /\w+@\w+\.\w+/g,
+            'number': /^\d{9}$/g,
+            'name': /^[a-zA-Z0-9_-]{3,16}$/g
+            // 'passwords': /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/g 
+        }
+        
+        for (let index = 0; index < inputs.length; index++) {
+            
+            let key = inputs[index].dataset.validate;
+            
+            if (key in regExpresions) {
+
+                let regex = regExpresions[key];
+
+                if (inputs[index].value.match(regex) == null) {
+                    inputs[index].classList.add("invalid");
+                    inputs[index].parentElement.querySelector("label").classList.add("error");
+                    inputs[index].parentElement.querySelector(".error-message").classList.add("d-block");
+                    validForm = false
+                } else {
+                    inputs[index].classList.remove("invalid");
+                    inputs[index].parentElement.querySelector("label").classList.remove("error");
+                    inputs[index].parentElement.querySelector(".error-message").classList.remove("d-block");
+                };
+            };
+    
+        };
+        
+        return validForm;
+    }
+
     async showElement(id) {
 
         let url = `${API_URL}${this.getAttribute('url')}/${id}`;
@@ -790,7 +833,7 @@ class DataForm extends HTMLElement {
                                             element: 'input',
                                             type: 'text',
                                             placeholder: '',
-                                            required: true,
+                                            required: false,
                                         },
                                         email: {
                                             label: 'Email',
@@ -826,75 +869,75 @@ class DataForm extends HTMLElement {
                 }
 
 
-            case '/api/admin/businesses':
+            // case '/api/admin/businesses':
 
-                return {
+            //     return {
 
-                    tabs: {
-                        main: {
-                            label: 'Principal',
-                        }
-                    },
+            //         tabs: {
+            //             main: {
+            //                 label: 'Principal',
+            //             }
+            //         },
 
-                    tabsContent: {
+            //         tabsContent: {
 
-                        main: {
-                            rows: {
-                                row1: {
-                                    formElements: {
-                                        company: {
-                                            label: 'Compañía',
-                                            element: 'input',
-                                            type: 'text',
-                                            placeholder: '',
-                                            required: true,
-                                        }
-                                    }
-                                },
-                                row2: {
-                                    formElements: {
-                                        street: {
-                                            label: 'Dirección',
-                                            element: 'input',
-                                            type: 'text',
-                                            placeholder: '',
-                                            required: true,
-                                            validate: 'email'
-                                        },
-                                        postalCode: {
-                                            label: 'C.P.',
-                                            element: 'input',
-                                            type: 'text',
-                                            placeholder: '',
-                                            required: true,
-                                            validate: 'email'
-                                        },
+            //             main: {
+            //                 rows: {
+            //                     row1: {
+            //                         formElements: {
+            //                             company: {
+            //                                 label: 'Compañía',
+            //                                 element: 'input',
+            //                                 type: 'text',
+            //                                 placeholder: '',
+            //                                 required: true,
+            //                             }
+            //                         }
+            //                     },
+            //                     row2: {
+            //                         formElements: {
+            //                             street: {
+            //                                 label: 'Dirección',
+            //                                 element: 'input',
+            //                                 type: 'text',
+            //                                 placeholder: '',
+            //                                 required: true,
+            //                                 validate: 'email'
+            //                             },
+            //                             postalCode: {
+            //                                 label: 'C.P.',
+            //                                 element: 'input',
+            //                                 type: 'text',
+            //                                 placeholder: '',
+            //                                 required: true,
+            //                                 validate: 'email'
+            //                             },
 
 
-                                    }
-                                },
-                                row2: {
-                                    formElements: {
-                                        password: {
-                                            label: 'Contraseña',
-                                            element: 'input',
-                                            type: 'password',
-                                            placeholder: '',
-                                            required: true
-                                        },
-                                        repeatPassword: {
-                                            label: 'Repita la contraseña',
-                                            element: 'input',
-                                            type: 'password',
-                                            placeholder: '',
-                                            required: true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            //                         }
+            //                     },
+            //                     row2: {
+            //                         formElements: {
+            //                             password: {
+            //                                 label: 'Contraseña',
+            //                                 element: 'input',
+            //                                 type: 'password',
+            //                                 placeholder: '',
+            //                                 required: true
+            //                             },
+            //                             repeatPassword: {
+            //                                 label: 'Repita la contraseña',
+            //                                 element: 'input',
+            //                                 type: 'password',
+            //                                 placeholder: '',
+            //                                 required: true
+            //                             }
+            //                         }
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
 
             case '/api/admin/ejemplo':
 
