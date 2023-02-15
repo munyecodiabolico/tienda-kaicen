@@ -264,6 +264,7 @@ class Table extends HTMLElement {
                     }
                 }));
 
+
             });
         });
 
@@ -305,6 +306,23 @@ class Table extends HTMLElement {
                         remove: true
                     }
                 };
+                case '/api/admin/books':
+
+                return {
+                    headers:{
+                        title: {
+                            label: 'Título',
+                        },
+                        author: {
+                            label: 'Autor',
+                        }
+                    },
+                    buttons: {
+                        edit: true,
+                        remove: true
+                    }
+                };
+
 
             case '/api/admin/taxes':
 

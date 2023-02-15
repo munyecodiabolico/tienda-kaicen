@@ -17,6 +17,7 @@ class DataForm extends HTMLElement {
         }));
 
         document.addEventListener('showElement', event => {
+            this.id = event.detail.id;
             this.showElement(event.detail.id);
         });
 
@@ -678,14 +679,16 @@ class DataForm extends HTMLElement {
                 return;
             };
 
-            let url = API_URL + this.getAttribute('url');
+
+            let url = this.id ? API_URL + this.getAttribute('url') + '/' + this.id : API_URL + this.getAttribute('url');
+            let method = this.id ? "PUT":"POST";
             let formData = new FormData(form);
             let formDataJson = Object.fromEntries(formData.entries());
 
             try {
 
                 let response = await fetch(url, {
-                    method: 'POST',
+                    method: method,
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
@@ -753,7 +756,7 @@ class DataForm extends HTMLElement {
         let validForm = true;
         let regExpresions = {
             'email': /\w+@\w+\.\w+/g,
-            'number': /^\d{9}$/g,
+            'number': /\d/g,
             'name': /^[a-zA-Z0-9_-]{3,16}$/g
             // 'passwords': /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/g 
         }
@@ -769,12 +772,12 @@ class DataForm extends HTMLElement {
                 if (inputs[index].value.match(regex) == null) {
                     inputs[index].classList.add("invalid");
                     inputs[index].parentElement.querySelector("label").classList.add("error");
-                    inputs[index].parentElement.querySelector(".error-message").classList.add("d-block");
+                    // inputs[index].parentElement.querySelector(".error-message").classList.add("d-block");
                     validForm = false
                 } else {
                     inputs[index].classList.remove("invalid");
                     inputs[index].parentElement.querySelector("label").classList.remove("error");
-                    inputs[index].parentElement.querySelector(".error-message").classList.remove("d-block");
+                    // inputs[index].parentElement.querySelector(".error-message").classList.remove("d-block");
                 };
             };
     
@@ -867,6 +870,108 @@ class DataForm extends HTMLElement {
                         }
                     }
                 }
+
+
+
+
+
+
+
+
+
+            // Formulario de usuarios
+            case '/api/admin/books':
+
+                return {
+
+                    tabs: {
+                        main: {
+                            label: 'Principal',
+                        }
+                    },
+
+                    tabsContent: {
+
+                        main: {
+                            rows: {
+                                row1: {
+                                    formElements: {
+                                        title: {
+                                            label: 'Nombre',
+                                            element: 'input',
+                                            type: 'text',
+                                            placeholder: '',
+                                            required: true,
+                                            validate: 'name'
+                                        }
+                                    }
+                                },
+                                row2: {
+                                    formElements: {
+                                        author: {
+                                            label: 'Autor',
+                                            element: 'input',
+                                            type: 'text',
+                                            placeholder: '',
+                                            required: true,
+                                            validate: 'name'
+                                        }
+                                    }
+                                },
+                                row3: {
+                                    formElements: {
+                                        description: {
+                                            label: 'Descripción',
+                                            element: 'textarea',
+                                            maxLength: 100,
+                                            placeholder: '',
+                                            required: true
+                                        },
+                                    }
+                                },
+                                row4: {
+                                    formElements: {
+                                        isbn: {
+                                            label: 'ISBN',
+                                            element: 'input',
+                                            type: 'number',
+                                            placeholder: '',
+                                            required: true,
+                                            validate: 'number'
+                                        },
+                                        pageCount: {
+                                            label: 'Nro. Páginas',
+                                            element: 'input',
+                                            type: 'number',
+                                            placeholder: '',
+                                            required: true,
+                                            validate: 'number'
+
+                                        },
+                                        publishedDate: {
+                                            label: 'Fecha de Publicacion',
+                                            element: 'input',
+                                            type: 'date',
+                                            placeholder: '',
+                                            required: true
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
 
 
             // case '/api/admin/businesses':
